@@ -2,35 +2,28 @@ package com.burixer85.aniclips.view.auth.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -39,6 +32,9 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.burixer85.aniclips.R
+import com.burixer85.aniclips.view.core.components.AniButton
+import com.burixer85.aniclips.view.core.components.AniTextField
+import com.burixer85.aniclips.view.core.components.AniTextFieldPassword
 
 @Preview
 @Composable
@@ -49,12 +45,11 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
     Scaffold { padding ->
         ConstraintLayout(
             Modifier
-                .background(Color(0xFF191A1F))
+                .background(MaterialTheme.colorScheme.background)
                 .padding(24.dp)
-                .padding(horizontal = 24.dp)
                 .fillMaxSize(),
         ) {
-            val (iLogo, tPresentation, tfEmail, tfPassword, btnLogin, tbtnNotAccount, tbtnRegister) = createRefs()
+            val (iLogo, tPresentation, tfUsername, tfPassword, btnLogin, tbtnNotAccount, tbtnRegister) = createRefs()
             var passwordHidden by remember { mutableStateOf(true) }
             Image(
                 modifier = Modifier
@@ -76,98 +71,61 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
                         start.linkTo(parent.start)
                         top.linkTo(iLogo.bottom)
                     },
-                text = "Inicia sesión con tu cuenta",
+                text = stringResource(R.string.login_screen_text_presentation),
                 fontSize = 24.sp,
-                color = Color.White
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                style = MaterialTheme.typography.bodyLarge,
+                textAlign = TextAlign.Center
             )
-            TextField(
+            AniTextField(
                 modifier = Modifier
                     .padding(top = 32.dp)
-                    .fillMaxWidth()
-                    .constrainAs(tfEmail) {
+                    .height(62.dp)
+                    .width(320.dp)
+                    .constrainAs(tfUsername) {
                         end.linkTo(parent.end)
                         start.linkTo(parent.start)
                         top.linkTo(tPresentation.bottom)
                     },
-                value = uiState.email,
-                onValueChange = { loginViewModel.onEmailChanged(it) },
-                colors = TextFieldDefaults.colors(
-                    unfocusedContainerColor = Color(0xFF1F222B),
-                    focusedContainerColor = Color(0xFF1F222B),
-                    unfocusedIndicatorColor = Color.Transparent,
-                    focusedIndicatorColor = Color.Transparent,
-                ),
+                value = uiState.username,
+                onValueChange = { loginViewModel.onUsernameChanged(it) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                singleLine = true,
-                shape = MaterialTheme.shapes.small,
-                placeholder = {
-                    Text(text = "Nombre de usuario", color = Color(0xFF66FFFFFF))
-                },
-                leadingIcon = {
-                    Icon(
-                        painter = painterResource(R.drawable.face_24px),
-                        contentDescription = "Nombre de usuario"
-                    )
-                }
+                text = stringResource(R.string.login_screen_textfield_username),
+                painter = painterResource(R.drawable.face_24px),
+                contentDescription = "Nombre de usuario"
             )
-            TextField(
+            AniTextFieldPassword(
                 modifier = Modifier
                     .padding(top = 32.dp)
-                    .fillMaxWidth()
+                    .height(62.dp)
+                    .width(320.dp)
                     .constrainAs(tfPassword) {
                         end.linkTo(parent.end)
                         start.linkTo(parent.start)
-                        top.linkTo(tfEmail.bottom)
+                        top.linkTo(tfUsername.bottom)
                     },
                 value = uiState.password,
                 onValueChange = { loginViewModel.onPasswordChanged(it) },
-                colors = TextFieldDefaults.colors(
-                    unfocusedContainerColor = Color(0xFF1F222B),
-                    focusedContainerColor = Color(0xFF1F222B),
-                    unfocusedIndicatorColor = Color.Transparent,
-                    focusedIndicatorColor = Color.Transparent,
-                ),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                singleLine = true,
-                shape = MaterialTheme.shapes.small,
-                placeholder = {
-                    Text(text = "Contraseña", color = Color(0xFF66FFFFFF))
-                },
-                leadingIcon = {
-                    Icon(
-                        painter = painterResource(R.drawable.lock_24px),
-                        contentDescription = "Nombre de usuario"
-                    )
-                },
-                visualTransformation = if (passwordHidden) PasswordVisualTransformation() else VisualTransformation.None,
-                trailingIcon = {
-                    Icon(
-                        modifier = Modifier.clickable { passwordHidden = !passwordHidden },
-                        painter = painterResource(
-                            if (passwordHidden) R.drawable.visibility_off else R.drawable.visibility_on
-                        ),
-                        tint = Color.White,
-                        contentDescription = if (passwordHidden) "Mostrar contraseña" else "Ocultar contraseña"
-                    )
-                },
+                text = stringResource(R.string.login_screen_textfield_password),
+                painter = painterResource(R.drawable.lock_24px),
+                contentDescription = "Contraseña",
+                passwordHidden = passwordHidden,
+                onPasswordVisibilityChange = { passwordHidden = !passwordHidden }
             )
-            Button(
+            AniButton(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .height(80.dp)
+                    .height(85.dp)
+                    .width(320.dp)
                     .padding(top = 30.dp)
                     .constrainAs(btnLogin) {
                         end.linkTo(parent.end)
                         start.linkTo(parent.start)
                         top.linkTo(tfPassword.bottom)
                     },
-                onClick = {},
-                shape = MaterialTheme.shapes.medium,
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF2D54CB),
-                    contentColor = Color.White
-                )
-            ) { Text(text = "iniciar Sesión", fontSize = 16.sp) }
+                text = stringResource(R.string.login_screen_button_login),
+                onClick = {}
+            )
             TextButton(
                 modifier = Modifier
                     .padding(top = 22.dp)
@@ -179,14 +137,15 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
                 onClick = {},
             ) {
                 Text(
-                    text = "Acceso sin cuenta registrada",
-                    fontSize = 16.sp,
-                    color = Color(0xFF2D54CB)
+                    text = stringResource(R.string.login_screen_text_no_account_access),
+                    color = MaterialTheme.colorScheme.primary,
+                    style = MaterialTheme.typography.bodyMedium,
+                    textAlign = TextAlign.Center
                 )
             }
             TextButton(
                 modifier = Modifier
-                    .padding(top = 62.dp)
+                    .padding(top = 82.dp)
                     .constrainAs(tbtnRegister) {
                         end.linkTo(parent.end)
                         start.linkTo(parent.start)
@@ -195,13 +154,13 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
                 onClick = {}) {
                 Text(
                     buildAnnotatedString {
-                        append("¿No tienes cuenta? ")
-                        withStyle(style = SpanStyle(color = Color(0xFF2D54CB))) {
-                            append("Regístrate")
+                        append(stringResource(R.string.login_screen_text_register_question) + " ")
+                        withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.primary)) {
+                            append(stringResource(R.string.login_screen_text_register_blue))
                         }
                     },
-                    fontSize = 16.sp,
-                    color = Color.White
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onPrimary
                 )
             }
         }

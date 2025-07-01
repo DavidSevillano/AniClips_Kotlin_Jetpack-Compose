@@ -1,9 +1,6 @@
 package com.burixer85.aniclips.view.core.navigation
 
-import kotlinx.serialization.Serializable
-
-@Serializable
-object Login
-
-@Serializable
-object Register
+object Screens {
+    const val Login = "login"
+    const val Register = "register"
+}

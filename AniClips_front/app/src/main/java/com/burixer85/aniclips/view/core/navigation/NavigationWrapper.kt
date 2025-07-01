@@ -7,10 +7,10 @@ import androidx.navigation.compose.rememberNavController
 import com.burixer85.aniclips.view.auth.login.LoginScreen
 
 @Composable
-fun NavigationWrapper(){
+fun NavigationWrapper() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Login) {
-        composable<Login> {
+    NavHost(navController = navController, startDestination = Screens.Login) {
+        composable(Screens.Login) {
             LoginScreen()
         }
     }
