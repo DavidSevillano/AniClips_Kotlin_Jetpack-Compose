@@ -1,8 +1,9 @@
-package com.burixer85.aniclips.view.auth.login
+package com.burixer85.aniclips.view.auth.register
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -25,7 +26,6 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -36,42 +36,43 @@ import com.burixer85.aniclips.view.core.components.AniButton
 import com.burixer85.aniclips.view.core.components.AniTextField
 import com.burixer85.aniclips.view.core.components.AniTextFieldPassword
 
-@Preview
 @Composable
-fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
+fun RegisterScreen(registerViewModel: RegisterViewModel = viewModel()) {
 
-    val uiState by loginViewModel.uiState.collectAsStateWithLifecycle()
+    val uiState by registerViewModel.uiState.collectAsStateWithLifecycle()
 
     Scaffold { padding ->
         ConstraintLayout(
-            Modifier
+            modifier = Modifier
                 .background(MaterialTheme.colorScheme.background)
-                .padding(24.dp)
-                .fillMaxSize(),
+                .padding(21.dp)
+                .fillMaxSize()
         ) {
-            val (iLogo, tPresentation, tfUsername, tfPassword, btnLogin, tbtnNotAccount, tbtnRegister) = createRefs()
+            val (ilogo, tPresentation, tfEmail, tfUsername, tfPassword, tfRepeatPassword, btnRegister, tbtnBackToLogin) = createRefs()
             var passwordHidden by remember { mutableStateOf(true) }
+            var repeatPasswordHidden by remember { mutableStateOf(true) }
+
             Image(
                 modifier = Modifier
-                    .padding(top = 64.dp)
+                    .padding(top = 24.dp)
                     .size(180.dp)
-                    .constrainAs(iLogo) {
-                        end.linkTo(parent.end)
+                    .constrainAs(ilogo) {
                         start.linkTo(parent.start)
+                        end.linkTo(parent.end)
                         top.linkTo(parent.top)
                     },
                 painter = painterResource(R.drawable.logo),
-                contentDescription = "Aniclips logo"
+                contentDescription = "Logo"
             )
             Text(
                 modifier = Modifier
                     .padding(top = 32.dp)
                     .constrainAs(tPresentation) {
-                        end.linkTo(parent.end)
                         start.linkTo(parent.start)
-                        top.linkTo(iLogo.bottom)
+                        end.linkTo(parent.end)
+                        top.linkTo(ilogo.bottom)
                     },
-                text = stringResource(R.string.login_screen_text_presentation),
+                text = stringResource(R.string.register_screen_text_presentation),
                 fontSize = 24.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 style = MaterialTheme.typography.bodyLarge,
@@ -82,15 +83,32 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
                     .padding(top = 32.dp)
                     .height(62.dp)
                     .width(320.dp)
-                    .constrainAs(tfUsername) {
+                    .constrainAs(tfEmail) {
                         end.linkTo(parent.end)
                         start.linkTo(parent.start)
                         top.linkTo(tPresentation.bottom)
                     },
-                value = uiState.username,
-                onValueChange = { loginViewModel.onUsernameChanged(it) },
+                value = uiState.email,
+                onValueChange = { registerViewModel.onEmailChanged(it) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                text = stringResource(R.string.login_screen_textfield_username),
+                text = stringResource(R.string.register_screen_textfield_email),
+                painter = painterResource(R.drawable.ic_mail),
+                contentDescription = "Email"
+            )
+            AniTextField(
+                modifier = Modifier
+                    .padding(top = 32.dp)
+                    .height(62.dp)
+                    .width(320.dp)
+                    .constrainAs(tfUsername) {
+                        end.linkTo(parent.end)
+                        start.linkTo(parent.start)
+                        top.linkTo(tfEmail.bottom)
+                    },
+                value = uiState.username,
+                onValueChange = { registerViewModel.onUsernameChanged(it) },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+                text = stringResource(R.string.register_screen_textfield_username),
                 painter = painterResource(R.drawable.face_24px),
                 contentDescription = "Nombre de usuario"
             )
@@ -105,58 +123,61 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
                         top.linkTo(tfUsername.bottom)
                     },
                 value = uiState.password,
-                onValueChange = { loginViewModel.onPasswordChanged(it) },
+                onValueChange = { registerViewModel.onPasswordChanged(it) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                text = stringResource(R.string.login_screen_textfield_password),
+                text = stringResource(R.string.register_screen_textfield_password),
                 painter = painterResource(R.drawable.lock_24px),
                 contentDescription = "Contraseña",
                 passwordHidden = passwordHidden,
                 onPasswordVisibilityChange = { passwordHidden = !passwordHidden }
             )
-            AniButton(
+            AniTextFieldPassword(
                 modifier = Modifier
-                    .padding(top = 34.dp)
-                    .height(52.dp)
+                    .padding(top = 32.dp)
+                    .height(62.dp)
                     .width(320.dp)
-                    .constrainAs(btnLogin) {
+                    .constrainAs(tfRepeatPassword) {
                         end.linkTo(parent.end)
                         start.linkTo(parent.start)
                         top.linkTo(tfPassword.bottom)
                     },
-                text = stringResource(R.string.login_screen_button_login),
+                value = uiState.repeatPassword,
+                onValueChange = { registerViewModel.onRepeatPasswordChanged(it) },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                text = stringResource(R.string.register_screen_textfield_repeat_password),
+                painter = painterResource(R.drawable.lock_24px),
+                contentDescription = "Repite la contraseña",
+                passwordHidden = repeatPasswordHidden,
+                onPasswordVisibilityChange = { repeatPasswordHidden = !repeatPasswordHidden }
+            )
+            AniButton(
+                modifier = Modifier
+                    .padding(top = 36.dp)
+                    .height(52.dp)
+                    .width(320.dp)
+                    .constrainAs(btnRegister) {
+                        end.linkTo(parent.end)
+                        start.linkTo(parent.start)
+                        top.linkTo(tfRepeatPassword.bottom)
+                    },
+                text = stringResource(R.string.register_screen_button_register),
                 onClick = {}
             )
             TextButton(
                 modifier = Modifier
-                    .padding(top = 22.dp)
-                    .constrainAs(tbtnNotAccount) {
+                    .padding(top = 20.dp)
+                    .fillMaxWidth()
+                    .constrainAs(tbtnBackToLogin) {
                         end.linkTo(parent.end)
                         start.linkTo(parent.start)
-                        top.linkTo(btnLogin.bottom)
-                    },
-                onClick = {},
-            ) {
-                Text(
-                    text = stringResource(R.string.login_screen_text_no_account_access),
-                    color = MaterialTheme.colorScheme.primary,
-                    style = MaterialTheme.typography.bodyMedium,
-                    textAlign = TextAlign.Center
-                )
-            }
-            TextButton(
-                modifier = Modifier
-                    .padding(top = 82.dp)
-                    .constrainAs(tbtnRegister) {
-                        end.linkTo(parent.end)
-                        start.linkTo(parent.start)
-                        top.linkTo(tbtnNotAccount.bottom)
+                        top.linkTo(btnRegister.bottom)
                     },
                 onClick = {}) {
                 Text(
                     buildAnnotatedString {
-                        append(stringResource(R.string.login_screen_text_register_question) + " ")
+                        append(stringResource(R.string.register_screen_text_go_back_login_question) + " ")
                         withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.primary)) {
-                            append(stringResource(R.string.login_screen_text_register_blue))
+                            append(stringResource(R.string.register_screen_text_go_back_login_blue))
                         }
                     },
                     style = MaterialTheme.typography.bodyMedium,
@@ -166,4 +187,6 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
         }
 
     }
+
+
 }
