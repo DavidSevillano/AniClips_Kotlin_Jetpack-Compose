@@ -25,7 +25,6 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -36,11 +35,11 @@ import com.burixer85.aniclips.view.core.components.AniButton
 import com.burixer85.aniclips.view.core.components.AniTextField
 import com.burixer85.aniclips.view.core.components.AniTextFieldPassword
 
-@Preview
 @Composable
-fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
+fun LoginScreen(loginViewModel: LoginViewModel = viewModel(), navigateToRegister: () -> Unit) {
 
     val uiState by loginViewModel.uiState.collectAsStateWithLifecycle()
+
 
     Scaffold { padding ->
         ConstraintLayout(
@@ -151,7 +150,7 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
                         start.linkTo(parent.start)
                         top.linkTo(tbtnNotAccount.bottom)
                     },
-                onClick = {}) {
+                onClick = { navigateToRegister() }) {
                 Text(
                     buildAnnotatedString {
                         append(stringResource(R.string.login_screen_text_register_question) + " ")

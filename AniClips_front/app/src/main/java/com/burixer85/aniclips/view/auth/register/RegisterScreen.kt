@@ -37,7 +37,7 @@ import com.burixer85.aniclips.view.core.components.AniTextField
 import com.burixer85.aniclips.view.core.components.AniTextFieldPassword
 
 @Composable
-fun RegisterScreen(registerViewModel: RegisterViewModel = viewModel()) {
+fun RegisterScreen(registerViewModel: RegisterViewModel = viewModel(), navigateBack: () -> Unit) {
 
     val uiState by registerViewModel.uiState.collectAsStateWithLifecycle()
 
@@ -172,7 +172,7 @@ fun RegisterScreen(registerViewModel: RegisterViewModel = viewModel()) {
                         start.linkTo(parent.start)
                         top.linkTo(btnRegister.bottom)
                     },
-                onClick = {}) {
+                onClick = { navigateBack() }) {
                 Text(
                     buildAnnotatedString {
                         append(stringResource(R.string.register_screen_text_go_back_login_question) + " ")
