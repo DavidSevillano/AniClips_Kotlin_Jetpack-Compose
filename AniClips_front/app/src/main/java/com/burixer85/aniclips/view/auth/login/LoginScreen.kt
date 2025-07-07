@@ -1,5 +1,6 @@
 package com.burixer85.aniclips.view.auth.login
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,16 +9,19 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
@@ -28,18 +32,25 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.burixer85.aniclips.R
 import com.burixer85.aniclips.view.core.components.AniButton
 import com.burixer85.aniclips.view.core.components.AniTextField
 import com.burixer85.aniclips.view.core.components.AniTextFieldPassword
 
+
 @Composable
-fun LoginScreen(loginViewModel: LoginViewModel = viewModel(), navigateToRegister: () -> Unit) {
+fun LoginScreen(loginViewModel: LoginViewModel = hiltViewModel(), navigateToRegister: () -> Unit) {
 
     val uiState by loginViewModel.uiState.collectAsStateWithLifecycle()
+    val context = LocalContext.current
 
+    LaunchedEffect(Unit) {
+        loginViewModel.eventFlow.collect { message ->
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        }
+    }
 
     Scaffold { padding ->
         ConstraintLayout(
@@ -50,6 +61,16 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel(), navigateToRegister
         ) {
             val (iLogo, tPresentation, tfUsername, tfPassword, btnLogin, tbtnNotAccount, tbtnRegister) = createRefs()
             var passwordHidden by remember { mutableStateOf(true) }
+
+            if (uiState.isLoading) {
+                CircularProgressIndicator(
+                    modifier = Modifier
+                        .constrainAs(createRef()) {
+                            centerTo(parent)
+                        }
+                )
+            }
+
             Image(
                 modifier = Modifier
                     .padding(top = 64.dp)
@@ -123,7 +144,7 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel(), navigateToRegister
                         top.linkTo(tfPassword.bottom)
                     },
                 text = stringResource(R.string.login_screen_button_login),
-                onClick = {}
+                onClick = { loginViewModel.onClickSelected() }
             )
             TextButton(
                 modifier = Modifier

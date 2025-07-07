@@ -34,7 +34,7 @@ fun AniTextField(
     color: Color = TextFieldPlaceholder,
     style: TextStyle = MaterialTheme.typography.bodyMedium,
     painter: Painter,
-    contentDescription: String,
+    contentDescription: String
 ) {
     TextField(
         modifier = modifier,

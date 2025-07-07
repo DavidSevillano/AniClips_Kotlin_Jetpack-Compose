@@ -3,7 +3,7 @@ package com.burixer85.aniclips.view.core.navigation
 import kotlinx.serialization.Serializable
 
 @Serializable
-object Login
+object LoginScreen
 
 @Serializable
-object Register
+object RegisterScreen

@@ -13,8 +13,8 @@ import com.burixer85.aniclips.view.auth.register.RegisterScreen
 fun NavigationWrapper() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Login) {
-        composable<Login>(
+    NavHost(navController = navController, startDestination = LoginScreen) {
+        composable<LoginScreen>(
             exitTransition = {
                 slideOutOfContainer(
                     AnimatedContentTransitionScope.SlideDirection.Left,
@@ -28,10 +28,10 @@ fun NavigationWrapper() {
                 )
             }
         ) {
-            LoginScreen(navigateToRegister = { navController.navigate(Register) })
+            LoginScreen(navigateToRegister = { navController.navigate(RegisterScreen) })
         }
 
-        composable<Register>(
+        composable<RegisterScreen>(
             enterTransition = {
                 slideIntoContainer(
                     AnimatedContentTransitionScope.SlideDirection.Left,
