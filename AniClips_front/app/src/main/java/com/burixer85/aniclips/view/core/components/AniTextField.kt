@@ -1,5 +1,6 @@
 package com.burixer85.aniclips.view.core.components
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -14,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.dp
 import com.burixer85.aniclips.ui.theme.TextFieldPlaceholder
 
 @Composable
@@ -51,9 +53,12 @@ fun AniTextField(
                 style = style
             )
         },
+        textStyle = style,
         leadingIcon = {
             Icon(
-                modifier = Modifier.alpha(0.8f),
+                modifier = Modifier
+                    .alpha(0.8f)
+                    .padding(start = 12.dp),
                 painter = painter,
                 contentDescription = contentDescription
             )

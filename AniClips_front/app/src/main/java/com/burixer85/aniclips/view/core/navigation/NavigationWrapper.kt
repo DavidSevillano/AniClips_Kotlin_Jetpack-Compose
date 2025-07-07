@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.burixer85.aniclips.view.auth.activateAccount.ActivateAccountScreen
 import com.burixer85.aniclips.view.auth.login.LoginScreen
 import com.burixer85.aniclips.view.auth.register.RegisterScreen
 
@@ -38,6 +39,12 @@ fun NavigationWrapper() {
                     tween(400)
                 )
             },
+            exitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left,
+                    tween(400)
+                )
+            },
             popExitTransition = {
                 slideOutOfContainer(
                     AnimatedContentTransitionScope.SlideDirection.Right,
@@ -46,7 +53,36 @@ fun NavigationWrapper() {
             }
         ) {
 
-            RegisterScreen(navigateBack = { navController.popBackStack() })
+            RegisterScreen(
+                navigateToActivateAccount = {
+                    navController.navigate(
+                        ActivateAccountScreen
+                    )
+                },
+                navigateBack = { navController.popBackStack() })
+        }
+
+        composable<ActivateAccountScreen>(
+            enterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left,
+                    tween(400)
+                )
+            },
+            exitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left,
+                    tween(400)
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right,
+                    tween(400)
+                )
+            },
+        ) {
+            ActivateAccountScreen()
         }
     }
 }

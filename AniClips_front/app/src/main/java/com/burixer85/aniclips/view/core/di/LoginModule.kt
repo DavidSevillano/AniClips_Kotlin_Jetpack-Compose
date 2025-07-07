@@ -1,7 +1,7 @@
 package com.burixer85.aniclips.view.core.di
 
-import com.burixer85.aniclips.data.repository.AuthRepositoryImp
-import com.burixer85.aniclips.domain.repository.AuthRepository
+import com.burixer85.aniclips.data.repository.LoginRepositoryImp
+import com.burixer85.aniclips.domain.repository.LoginRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -10,10 +10,10 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class AuthModule {
+abstract class LoginModule {
     @Binds
     @Singleton
-    abstract fun bindAuthRepository(
-        impl: AuthRepositoryImp
-    ): AuthRepository
+    abstract fun bindLoginRepository(
+        impl: LoginRepositoryImp
+    ): LoginRepository
 }

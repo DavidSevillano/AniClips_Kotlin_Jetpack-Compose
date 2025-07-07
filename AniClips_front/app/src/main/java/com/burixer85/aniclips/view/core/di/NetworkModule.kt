@@ -1,6 +1,7 @@
 package com.burixer85.aniclips.view.core.di
 
 import com.burixer85.aniclips.data.network.LoginClient
+import com.burixer85.aniclips.data.network.RegisterClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,6 +29,12 @@ class NetworkModule {
     @Provides
     fun provideLoginClient(retrofit: Retrofit): LoginClient {
         return retrofit.create(LoginClient::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideRegisterClient(retrofit: Retrofit): RegisterClient {
+        return retrofit.create(RegisterClient::class.java)
     }
 
 

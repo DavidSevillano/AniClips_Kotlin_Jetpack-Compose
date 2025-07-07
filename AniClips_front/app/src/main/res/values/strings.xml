@@ -20,5 +20,10 @@
     <string name="register_screen_text_go_back_login_question">¿Ya tienes una cuenta? </string>
     <string name="register_screen_text_go_back_login_blue">Inicia sesión</string>
 
+    <!-- Activate Account Screen -->
+    <string name="activate_account_screen_text_presentation">Introduce el código de activación que hemos enviado a tu email</string>
+    <string name="activate_account_screen_textfield_username">Código de activación</string>
+    <string name="activate_account_screen_button_send">Enviar</string>
+
 
 </resources>

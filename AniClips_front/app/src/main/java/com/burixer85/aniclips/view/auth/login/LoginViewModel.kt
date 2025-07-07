@@ -2,6 +2,7 @@ package com.burixer85.aniclips.view.auth.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.burixer85.aniclips.domain.model.OperationResult
 import com.burixer85.aniclips.domain.usecase.Login
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -40,10 +41,12 @@ class LoginViewModel @Inject constructor(val login: Login) : ViewModel() {
             _uiState.update { it.copy(isLoading = true) }
             val result = login(_uiState.value.username, _uiState.value.password)
             _uiState.update { it.copy(isLoading = false) }
-            if (result == null) {
-                _eventChannel.send("Login fallido")
-            } else {
-                _eventChannel.send("success")
+            when (result) {
+                is OperationResult.Success -> _eventChannel.send("Login exitoso")
+                is OperationResult.EmptyFields -> _eventChannel.send("Campos vacíos")
+                is OperationResult.InvalidCredentials -> _eventChannel.send("Credenciales incorrectas")
+                is OperationResult.NetworkError -> _eventChannel.send("Error de red")
+                else -> {}
             }
         }
     }

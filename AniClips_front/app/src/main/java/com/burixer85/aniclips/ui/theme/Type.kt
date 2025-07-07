@@ -17,7 +17,7 @@ val Typography = Typography(
     bodyLarge = TextStyle(
         fontFamily = lexend,
         fontWeight = FontWeight.Normal,
-        fontSize = 20.sp,
+        fontSize = 24.sp,
     ),
     bodyMedium = TextStyle(
         fontFamily = lexend,
@@ -27,7 +27,17 @@ val Typography = Typography(
     bodySmall = TextStyle(
         fontFamily = lexend,
         fontWeight = FontWeight.Normal,
+        fontSize = 15.sp,
+    ),
+    labelLarge = TextStyle(
+        fontFamily = lexend,
+        fontWeight = FontWeight.Normal,
         fontSize = 12.sp,
+    ),
+    labelMedium = TextStyle(
+        fontFamily = lexend,
+        fontWeight = FontWeight.Normal,
+        fontSize = 10.sp,
     )
 
 

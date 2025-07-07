@@ -2,11 +2,11 @@ package com.burixer85.aniclips.data.repository
 
 import com.burixer85.aniclips.data.service.LoginService
 import com.burixer85.aniclips.domain.model.UserLogin
-import com.burixer85.aniclips.domain.repository.AuthRepository
+import com.burixer85.aniclips.domain.repository.LoginRepository
 import javax.inject.Inject
 
-class AuthRepositoryImp @Inject constructor(private val loginService: LoginService) :
-    AuthRepository {
+class LoginRepositoryImp @Inject constructor(private val loginService: LoginService) :
+    LoginRepository {
     override suspend fun login(username: String, password: String): UserLogin? {
         val response = loginService.login(username, password)
         return response?.let {

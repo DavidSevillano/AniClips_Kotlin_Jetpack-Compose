@@ -2,6 +2,7 @@ package com.burixer85.aniclips.view.core.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -20,6 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.dp
 import com.burixer85.aniclips.R
 import com.burixer85.aniclips.ui.theme.TextFieldPlaceholder
 
@@ -53,6 +55,7 @@ fun AniTextFieldPassword(
         keyboardOptions = keyboardOptions,
         singleLine = singleLine,
         shape = shape,
+        textStyle = style,
         placeholder = {
             Text(
                 text = text,
@@ -62,7 +65,9 @@ fun AniTextFieldPassword(
         },
         leadingIcon = {
             Icon(
-                modifier = Modifier.alpha(0.8f),
+                modifier = Modifier
+                    .alpha(0.8f)
+                    .padding(start = 12.dp),
                 painter = painter,
                 contentDescription = contentDescription
             )
@@ -72,6 +77,7 @@ fun AniTextFieldPassword(
             Icon(
                 modifier = Modifier
                     .alpha(0.8f)
+                    .padding(end = 12.dp)
                     .clickable(
                         indication = null,
                         interactionSource = remember { MutableInteractionSource() }

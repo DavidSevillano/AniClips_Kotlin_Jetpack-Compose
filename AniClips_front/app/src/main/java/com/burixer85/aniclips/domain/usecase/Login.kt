@@ -1,14 +1,18 @@
 package com.burixer85.aniclips.domain.usecase
 
+import com.burixer85.aniclips.domain.model.OperationResult
 import com.burixer85.aniclips.domain.model.UserLogin
-import com.burixer85.aniclips.domain.repository.AuthRepository
+import com.burixer85.aniclips.domain.repository.LoginRepository
 import javax.inject.Inject
 
-class Login @Inject constructor(val authRepository: AuthRepository) {
-    suspend operator fun invoke(username: String, password: String): UserLogin? {
+class Login @Inject constructor(val loginRepository: LoginRepository) {
+    suspend operator fun invoke(username: String, password: String): OperationResult<UserLogin> {
 
         if (username.isEmpty() || password.isEmpty()) {
+            return OperationResult.EmptyFields
         }
-        return authRepository.login(username, password)
+        val user = loginRepository.login(username, password)
+
+        return if (user != null) OperationResult.Success(user) else OperationResult.InvalidCredentials
     }
 }
