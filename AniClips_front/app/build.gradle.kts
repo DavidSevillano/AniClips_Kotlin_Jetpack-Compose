@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.jetbrainsKotlinSerialization)
     alias(libs.plugins.hilt.android)
-    kotlin("kapt")
+    alias(libs.plugins.ksp.android)
 }
 
 android {
@@ -74,10 +74,10 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
 
-    //Dagger Hilt
+    //DI
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation)
-    kapt(libs.hilt.android.compiler)
+    ksp(libs.hilt.android.compiler)
 
 
 }

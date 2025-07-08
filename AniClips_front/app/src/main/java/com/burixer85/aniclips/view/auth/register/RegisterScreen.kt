@@ -16,7 +16,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -49,17 +48,14 @@ fun RegisterScreen(
 ) {
     val uiState by registerViewModel.uiState.collectAsStateWithLifecycle()
     val context = LocalContext.current
-    val eventFlow = registerViewModel.eventFlow.collectAsState(initial = "")
-
-    LaunchedEffect(eventFlow.value) {
-        if (eventFlow.value == "Registro exitoso") {
-            navigateToActivateAccount()
-        }
-    }
 
     LaunchedEffect(Unit) {
         registerViewModel.eventFlow.collect { message ->
-            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            if (message == "Registro exitoso") {
+                navigateToActivateAccount()
+            } else if (message.isNotBlank()) {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -188,7 +184,6 @@ fun RegisterScreen(
                 TextButton(
                     modifier = Modifier
                         .padding(top = 20.dp)
-                        .fillMaxSize()
                         .constrainAs(tbtnBackToLogin) {
                             end.linkTo(parent.end)
                             start.linkTo(parent.start)

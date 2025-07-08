@@ -5,7 +5,7 @@ import com.burixer85.aniclips.domain.model.UserLogin
 import com.burixer85.aniclips.domain.repository.LoginRepository
 import javax.inject.Inject
 
-class Login @Inject constructor(val loginRepository: LoginRepository) {
+class LoginUseCase @Inject constructor(val loginRepository: LoginRepository) {
     suspend operator fun invoke(username: String, password: String): OperationResult<UserLogin> {
 
         if (username.isEmpty() || password.isEmpty()) {

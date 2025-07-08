@@ -6,7 +6,7 @@ import com.burixer85.aniclips.domain.model.UserRegister
 import com.burixer85.aniclips.domain.repository.RegisterRepository
 import javax.inject.Inject
 
-class Register @Inject constructor(val registerRepository: RegisterRepository) {
+class RegisterUseCase @Inject constructor(val registerRepository: RegisterRepository) {
     suspend operator fun invoke(
         username: String,
         email: String,

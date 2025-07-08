@@ -3,7 +3,7 @@ package com.burixer85.aniclips.view.auth.register
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.burixer85.aniclips.domain.model.OperationResult
-import com.burixer85.aniclips.domain.usecase.Register
+import com.burixer85.aniclips.domain.usecase.RegisterUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterViewModel @Inject constructor(var register: Register) : ViewModel() {
+class RegisterViewModel @Inject constructor(var registerUseCase: RegisterUseCase) : ViewModel() {
 
     private val _uiState = MutableStateFlow(RegisterUiState())
     val uiState: StateFlow<RegisterUiState> = _uiState
@@ -50,7 +50,7 @@ class RegisterViewModel @Inject constructor(var register: Register) : ViewModel(
     fun onClickSelected() {
         viewModelScope.launch(Dispatchers.IO) {
             _uiState.update { it.copy(isLoading = true) }
-            val result = register(
+            val result = registerUseCase(
                 _uiState.value.username,
                 _uiState.value.email,
                 _uiState.value.password,
