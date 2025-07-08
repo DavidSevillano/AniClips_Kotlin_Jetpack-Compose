@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.burixer85.aniclips.domain.model.UserLogin
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.map
 import java.util.UUID
@@ -35,7 +36,7 @@ class SessionManager @Inject constructor(
             prefs[ID_KEY] = id.toString()
             prefs[USERNAME_KEY] = username
             prefs[AVATAR_KEY] = avatar
-            prefs[ROLE_KEY] = role.joinToString(",")
+            prefs[ROLE_KEY] = role.firstOrNull() ?: ""
             prefs[TOKEN_KEY] = token
         }
     }
@@ -44,10 +45,10 @@ class SessionManager @Inject constructor(
         val id = prefs[ID_KEY]?.let { UUID.fromString(it) }
         val username = prefs[USERNAME_KEY] ?: ""
         val avatar = prefs[AVATAR_KEY] ?: ""
-        val role = prefs[ROLE_KEY]?.split(",") ?: emptyList()
+        val role = prefs[ROLE_KEY]?.let { listOf(it) } ?: emptyList()
         val token = prefs[TOKEN_KEY] ?: ""
         if (id != null && username.isNotEmpty() && token.isNotEmpty()) {
-            com.burixer85.aniclips.domain.model.UserLogin(id, username, avatar, role, token)
+            UserLogin(id, username, avatar, role, token)
         } else {
             null
         }

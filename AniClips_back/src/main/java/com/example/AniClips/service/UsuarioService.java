@@ -8,13 +8,12 @@ import java.util.UUID;
 import com.example.AniClips.dto.user.EditSeguidoDto;
 import com.example.AniClips.dto.user.signupLogin.CreateUserRequest;
 import com.example.AniClips.error.ActivationExpiredException;
-import com.example.AniClips.error.UnauthorizedAccessException;
 import com.example.AniClips.model.Perfil;
 import com.example.AniClips.model.Usuario;
 import com.example.AniClips.model.UserRole;
 import com.example.AniClips.repo.UsuarioRepository;
 import com.example.AniClips.security.security.jwt.refresh.RefreshTokenRepository;
-import com.example.AniClips.security.util.SendGridMailSender;
+import com.example.AniClips.security.util.MailtrapMailSender;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,7 +29,7 @@ public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder;
-    private final SendGridMailSender mailSender;
+    private final MailtrapMailSender mailSender;
     private final RefreshTokenRepository refreshTokenRepository;
     //private final ResendMailSender mailSender;
 
