@@ -17,6 +17,7 @@ hilt = "2.56.2"
 hiltNavigation = "1.2.0"
 ksp = "2.1.21-2.0.1"
 dataStorePreference = "1.1.7"
+lottie = "6.6.7"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -44,6 +45,7 @@ hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref
 hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigation" }
 dataStorePreference-android = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "dataStorePreference" }
+lottie-compose = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottie" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

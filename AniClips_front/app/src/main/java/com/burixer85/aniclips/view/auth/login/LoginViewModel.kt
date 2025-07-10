@@ -40,11 +40,20 @@ class LoginViewModel @Inject constructor(
         }
     }
 
+    fun setLoadingTrue() {
+        _uiState.update { it.copy(isLoading = true) }
+    }
+
+    fun setLoadingFalse() {
+        _uiState.update { it.copy(isLoading = false) }
+    }
+
+
     fun onClickSelected() {
         viewModelScope.launch(Dispatchers.IO) {
-            _uiState.update { it.copy(isLoading = true) }
+            setLoadingTrue()
             val result = loginUseCase(_uiState.value.username, _uiState.value.password)
-            _uiState.update { it.copy(isLoading = false) }
+            setLoadingFalse()
             when (result) {
                 is OperationResult.Success -> {
                     val user = result.data

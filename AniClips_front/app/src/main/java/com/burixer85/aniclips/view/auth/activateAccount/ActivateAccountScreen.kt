@@ -4,6 +4,7 @@ import android.app.Activity
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -15,6 +16,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,16 +34,24 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.burixer85.aniclips.R
 import com.burixer85.aniclips.view.core.components.AniButton
+import com.burixer85.aniclips.view.core.components.AniCircularProgressIndicator
+import com.burixer85.aniclips.view.core.components.AniDialogActivateAccount
 import com.burixer85.aniclips.view.core.components.AniImageLogo
 import com.burixer85.aniclips.view.core.components.AniTextField
 import kotlinx.coroutines.delay
 
 @Composable
-fun ActivateAccountScreen(activateAccountViewModel: ActivateAccountViewModel = hiltViewModel()) {
+fun ActivateAccountScreen(
+    activateAccountViewModel: ActivateAccountViewModel = hiltViewModel(),
+    navigateToLogin: () -> Unit
+) {
 
     val uiState by activateAccountViewModel.uiState.collectAsStateWithLifecycle()
+    val username by activateAccountViewModel.username.collectAsState()
     val context = LocalContext.current
     var showExitPrompt by remember { mutableStateOf(false) }
+    var showDialog by remember { mutableStateOf(false) }
+
 
     BackHandler {
         if (showExitPrompt) {
@@ -65,78 +75,109 @@ fun ActivateAccountScreen(activateAccountViewModel: ActivateAccountViewModel = h
 
     LaunchedEffect(Unit) {
         activateAccountViewModel.eventFlow.collect { message ->
-            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+
+            if (message == "Cuenta activada correctamente") {
+                showDialog = true
+            } else if (message.isNotBlank()) {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    if (showDialog) {
+        Box(
+            modifier = Modifier
+                .background(MaterialTheme.colorScheme.background)
+                .padding(21.dp)
+                .fillMaxSize()
+        ) {
+            AniDialogActivateAccount(
+                username = username,
+                onAccept = {
+                    showDialog = false
+                    navigateToLogin()
+                }
+            )
         }
     }
 
     Scaffold { padding ->
-        ConstraintLayout(
-            Modifier
+        Box(
+            modifier = Modifier
                 .background(MaterialTheme.colorScheme.background)
-                .padding(24.dp)
-                .fillMaxSize(),
+                .padding(21.dp)
+                .fillMaxSize()
         ) {
-            val guidelineTop = createGuidelineFromTop(0.2f)
-            val guidelineStart = createGuidelineFromStart(0.06f)
-            val guidelineEnd = createGuidelineFromEnd(0.06f)
+            ConstraintLayout(
+                Modifier
+                    .fillMaxSize(),
+            ) {
+                val guidelineTop = createGuidelineFromTop(0.2f)
+                val guidelineStart = createGuidelineFromStart(0.06f)
+                val guidelineEnd = createGuidelineFromEnd(0.06f)
 
-            val (iLogo, tPresentation, tfCode, btnSend) = createRefs()
+                val (iLogo, tPresentation, tfCode, btnSend) = createRefs()
 
-            AniImageLogo(
-                modifier = Modifier
-                    .size(180.dp)
-                    .constrainAs(iLogo) {
-                        end.linkTo(guidelineEnd)
-                        start.linkTo(guidelineStart)
-                        top.linkTo(guidelineTop)
-                    }
-            )
-            Text(
-                modifier = Modifier
-                    .padding(top = 32.dp)
-                    .constrainAs(tPresentation) {
-                        end.linkTo(guidelineEnd)
-                        start.linkTo(guidelineStart)
-                        top.linkTo(iLogo.bottom)
-                        width = Dimension.fillToConstraints
+                AniImageLogo(
+                    modifier = Modifier
+                        .size(180.dp)
+                        .constrainAs(iLogo) {
+                            end.linkTo(guidelineEnd)
+                            start.linkTo(guidelineStart)
+                            top.linkTo(guidelineTop)
+                        }
+                )
+                Text(
+                    modifier = Modifier
+                        .padding(top = 32.dp)
+                        .constrainAs(tPresentation) {
+                            end.linkTo(guidelineEnd)
+                            start.linkTo(guidelineStart)
+                            top.linkTo(iLogo.bottom)
+                            width = Dimension.fillToConstraints
 
-                    },
-                text = stringResource(R.string.activate_account_screen_text_presentation),
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                style = MaterialTheme.typography.bodySmall,
-                textAlign = TextAlign.Center
-            )
-            AniTextField(
-                modifier = Modifier
-                    .padding(top = 32.dp)
-                    .height(62.dp)
-                    .constrainAs(tfCode) {
-                        end.linkTo(guidelineEnd)
-                        start.linkTo(guidelineStart)
-                        top.linkTo(tPresentation.bottom)
-                        width = Dimension.fillToConstraints
+                        },
+                    text = stringResource(R.string.activate_account_screen_text_presentation),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = MaterialTheme.typography.bodySmall,
+                    textAlign = TextAlign.Center
+                )
+                AniTextField(
+                    modifier = Modifier
+                        .padding(top = 32.dp)
+                        .height(62.dp)
+                        .width(320.dp)
+                        .constrainAs(tfCode) {
+                            end.linkTo(guidelineEnd)
+                            start.linkTo(guidelineStart)
+                            top.linkTo(tPresentation.bottom)
+                            width = Dimension.fillToConstraints
 
-                    },
-                value = uiState.code,
-                onValueChange = { activateAccountViewModel.onCodeChanged(it) },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                text = stringResource(R.string.activate_account_screen_textfield_username),
-                painter = painterResource(R.drawable.ic_key),
-                contentDescription = "Código de activación"
-            )
-            AniButton(
-                modifier = Modifier
-                    .padding(top = 34.dp)
-                    .height(52.dp)
-                    .width(320.dp)
-                    .constrainAs(btnSend) {
-                        end.linkTo(guidelineEnd)
-                        start.linkTo(guidelineStart)
-                        top.linkTo(tfCode.bottom)
-                    },
-                text = stringResource(R.string.activate_account_screen_button_send),
-                onClick = { activateAccountViewModel.onClickSelected() }
-            )
+                        },
+                    value = uiState.code,
+                    onValueChange = { activateAccountViewModel.onCodeChanged(it) },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    text = stringResource(R.string.activate_account_screen_textfield_username),
+                    painter = painterResource(R.drawable.ic_key),
+                    contentDescription = "Código de activación"
+                )
+                AniButton(
+                    modifier = Modifier
+                        .padding(top = 34.dp)
+                        .height(52.dp)
+                        .width(320.dp)
+                        .constrainAs(btnSend) {
+                            end.linkTo(guidelineEnd)
+                            start.linkTo(guidelineStart)
+                            top.linkTo(tfCode.bottom)
+                        },
+                    text = stringResource(R.string.activate_account_screen_button_send),
+                    onClick = { activateAccountViewModel.onClickSelected() }
+                )
+            }
+            if (uiState.isLoading) {
+                AniCircularProgressIndicator()
+            }
         }
     }
 }

@@ -82,7 +82,7 @@ fun NavigationWrapper() {
                 )
             },
         ) {
-            ActivateAccountScreen()
+            ActivateAccountScreen(navigateToLogin = { navController.navigate(LoginScreen) })
         }
     }
 }

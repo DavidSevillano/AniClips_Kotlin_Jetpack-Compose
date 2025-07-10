@@ -31,13 +31,13 @@ val Typography = Typography(
     ),
     labelLarge = TextStyle(
         fontFamily = lexend,
-        fontWeight = FontWeight.Normal,
-        fontSize = 12.sp,
+        fontWeight = FontWeight.Bold,
+        fontSize = 14.sp,
     ),
     labelMedium = TextStyle(
         fontFamily = lexend,
         fontWeight = FontWeight.Normal,
-        fontSize = 10.sp,
+        fontSize = 12.sp,
     )
 
 

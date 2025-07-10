@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.burixer85.aniclips.domain.model.UserLogin
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import java.util.UUID
 import javax.inject.Inject
@@ -23,6 +24,20 @@ class SessionManager @Inject constructor(
         private val AVATAR_KEY = stringPreferencesKey("user_avatar")
         private val ROLE_KEY = stringPreferencesKey("user_role")
         private val TOKEN_KEY = stringPreferencesKey("user_token")
+    }
+
+    suspend fun saveUsername(
+        username: String,
+    ) {
+        context.dataStore.edit { prefs ->
+            prefs[USERNAME_KEY] = username
+        }
+    }
+
+    suspend fun getUsername(): String {
+        return context.dataStore.data
+            .map { prefs -> prefs[USERNAME_KEY] ?: "" }
+            .first()
     }
 
     suspend fun saveUserLogin(

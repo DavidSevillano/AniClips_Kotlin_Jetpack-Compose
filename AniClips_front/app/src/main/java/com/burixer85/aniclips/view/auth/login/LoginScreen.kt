@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -20,7 +19,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -36,6 +34,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.burixer85.aniclips.R
 import com.burixer85.aniclips.view.core.components.AniButton
+import com.burixer85.aniclips.view.core.components.AniCircularProgressIndicator
 import com.burixer85.aniclips.view.core.components.AniImageLogo
 import com.burixer85.aniclips.view.core.components.AniTextField
 import com.burixer85.aniclips.view.core.components.AniTextFieldPassword
@@ -176,14 +175,7 @@ fun LoginScreen(loginViewModel: LoginViewModel = hiltViewModel(), navigateToRegi
                 }
             }
             if (uiState.isLoading) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(MaterialTheme.colorScheme.background.copy(alpha = 0.5f)),
-                    contentAlignment = Alignment.Center
-                ) {
-                    CircularProgressIndicator()
-                }
+                AniCircularProgressIndicator()
             }
         }
     }

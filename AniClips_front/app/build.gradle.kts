@@ -80,5 +80,8 @@ dependencies {
     implementation(libs.hilt.navigation)
     ksp(libs.hilt.android.compiler)
 
+    //Lottie
+    implementation(libs.lottie.compose)
+
 
 }

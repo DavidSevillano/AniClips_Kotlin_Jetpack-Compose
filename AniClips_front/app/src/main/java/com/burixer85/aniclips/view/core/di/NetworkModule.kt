@@ -1,5 +1,6 @@
 package com.burixer85.aniclips.view.core.di
 
+import com.burixer85.aniclips.data.network.ActivateAccountClient
 import com.burixer85.aniclips.data.network.LoginClient
 import com.burixer85.aniclips.data.network.RegisterClient
 import dagger.Module
@@ -35,6 +36,12 @@ class NetworkModule {
     @Provides
     fun provideRegisterClient(retrofit: Retrofit): RegisterClient {
         return retrofit.create(RegisterClient::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideActivateAccountClient(retrofit: Retrofit): ActivateAccountClient {
+        return retrofit.create(ActivateAccountClient::class.java)
     }
 
 

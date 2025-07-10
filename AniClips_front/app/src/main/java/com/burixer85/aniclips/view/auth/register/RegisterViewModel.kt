@@ -2,6 +2,7 @@ package com.burixer85.aniclips.view.auth.register
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.burixer85.aniclips.data.manager.SessionManager
 import com.burixer85.aniclips.domain.model.OperationResult
 import com.burixer85.aniclips.domain.usecase.RegisterUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +16,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterViewModel @Inject constructor(var registerUseCase: RegisterUseCase) : ViewModel() {
+class RegisterViewModel @Inject constructor(
+    val registerUseCase: RegisterUseCase,
+    val sessionManager: SessionManager
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow(RegisterUiState())
     val uiState: StateFlow<RegisterUiState> = _uiState
@@ -47,18 +51,32 @@ class RegisterViewModel @Inject constructor(var registerUseCase: RegisterUseCase
         }
     }
 
+    fun setLoadingTrue() {
+        _uiState.update { it.copy(isLoading = true) }
+    }
+
+    fun setLoadingFalse() {
+        _uiState.update { it.copy(isLoading = false) }
+    }
+
     fun onClickSelected() {
         viewModelScope.launch(Dispatchers.IO) {
-            _uiState.update { it.copy(isLoading = true) }
+            setLoadingTrue()
             val result = registerUseCase(
                 _uiState.value.username,
                 _uiState.value.email,
                 _uiState.value.password,
                 _uiState.value.repeatPassword
             )
-            _uiState.update { it.copy(isLoading = false) }
+            setLoadingFalse()
             when (result) {
-                is OperationResult.Success -> _eventChannel.send("Registro exitoso")
+                is OperationResult.Success -> {
+                    viewModelScope.launch {
+                        sessionManager.saveUsername(_uiState.value.username)
+                    }
+                    _eventChannel.send("Registro exitoso")
+                }
+
                 is OperationResult.EmptyFields -> _eventChannel.send("Campos vacíos")
                 is OperationResult.InvalidCredentials -> _eventChannel.send("Datos inválidos o usuario ya existente")
                 is OperationResult.NetworkError -> _eventChannel.send("Error de red")
