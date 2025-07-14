@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.burixer85.aniclips"
-        minSdk = 24
+        minSdk = 30
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -57,7 +57,7 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.dataStorePreference.android)
     implementation(libs.coil.compose)
-    
+
     //Navigation
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.constraintlayout.compose)

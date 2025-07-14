@@ -37,8 +37,9 @@ class HomeScreenViewModel @Inject constructor(
         viewModelScope.launch {
             setLoadingTrue()
             val token = sessionManager.getToken()
-            Log.i("ClipService", "token: $token")
+            Log.d("HomeScreenViewModel", "Clips recibidos: $token")
             val result = clipRepository.getAllClips(page, size, "Bearer $token")
+            Log.d("HomeScreenViewModel", "Clips recibidos: ${result?.clips}")
             _clips.value = result?.clips ?: emptyList()
             setLoadingFalse()
         }

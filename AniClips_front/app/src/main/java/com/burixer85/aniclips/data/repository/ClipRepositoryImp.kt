@@ -14,6 +14,8 @@ class ClipRepositoryImp @Inject constructor(val clipService: ClipService) : Clip
 
         val getClipsResponse: GetClipsResponse? =
             clipService.getAllClips(page, size, token)
+        android.util.Log.d("ClipRepositoryImp", "Respuesta backend: $getClipsResponse")
+
         return getClipsResponse?.toDomain()
 
     }

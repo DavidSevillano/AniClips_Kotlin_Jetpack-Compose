@@ -1,5 +1,6 @@
 package com.burixer85.aniclips.view.auth.login
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.burixer85.aniclips.data.manager.SessionManager
@@ -65,6 +66,8 @@ class LoginViewModel @Inject constructor(
                         token = user.token
                     )
                     _eventChannel.send("Login exitoso")
+                    Log.d("LoginViewModel", "Token recibido y guardado: ${user.token}")
+
                 }
 
                 is OperationResultAuth.EmptyFields -> _eventChannel.send("Campos vacíos")
