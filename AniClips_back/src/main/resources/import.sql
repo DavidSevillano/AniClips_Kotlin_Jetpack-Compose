@@ -1,8 +1,8 @@
 INSERT INTO usuario (id, username, email, password, enabled, activation_token, created_at)
 VALUES
   ('11111111-1111-1111-1111-111111111111', 'StrikerDa10', 'naruto@konoha.com', '{noop}1', true, NULL, NOW()),
-  ('22222222-2222-2222-2222-222222222222', 'goku', 'goku@saiyan.com', '{noop}hashed_password', true, NULL, NOW()),
-  ('33333333-3333-3333-3333-333333333333', 'eren', 'eren@paradis.com', '{noop}hashed_password', true, NULL, NOW()),
+  ('22222222-2222-2222-2222-222222222222', 'Goku21', 'goku@saiyan.com', '{noop}hashed_password', true, NULL, NOW()),
+  ('33333333-3333-3333-3333-333333333333', 'ErenYeager', 'eren@paradis.com', '{noop}hashed_password', true, NULL, NOW()),
   ('44444444-4444-4444-4444-444444444444', 'luffy', 'luffy@strawhat.com', '{noop}hashed_password', true, NULL, NOW()),
   ('55555555-5555-5555-5555-555555555555', 'zoro', 'zoro@strawhat.com', '{noop}admin', true, NULL, NOW()),
   ('7db9261f-f6b5-42a6-a5c0-b6234a39ffb5', 'Zack', 'usuario01@anime.com', '{noop}hashed_password', true, NULL, NOW()),
@@ -77,13 +77,13 @@ VALUES
   ('Death Note', 'La batalla del festival deportivo', 'http://192.168.1.141:8080/videos/Death_Note_3.mp4', '2024-03-03', 9100, 120, 'http://192.168.1.141:8080/miniaturas/Death_Note_3.jpg', 'cfb3f7e5-3620-4bd2-85c1-f7589d137c72', 'Shonen'),
   ('Jojos', 'Kaneki despierta su ghoul interior', 'http://192.168.1.141:8080/videos/Jojos_1.mp4', '2024-04-01', 7200, 100, 'http://192.168.1.141:8080/miniaturas/Jojos_1.jpg', '2e0ef9b2-56a0-4bd1-b94f-30e1a01fc879', 'Seinen'),
   ('Jojos', 'La pelea en el Antiguo Distrito 20', 'http://192.168.1.141:8080/videos/Jojos_2.mp4', '2024-04-02', 6800, 105, 'http://192.168.1.141:8080/miniaturas/Jojos_2.jpg', 'b2b8f4fc-b1f6-4a4e-8baf-11333cd6b5f4', 'Seinen'),
-  ('Jojos', 'La tortura de Jason a Kaneki', 'http://192.168.1.141:8080/videos/Jojos_3.mp4', '2024-04-03', 7600, 95, 'http://192.168.1.141:8080/miniaturas/Jojos_3.jpg', 'fa49b90d-f100-4b69-8bc6-d7cde9a27204', 'Seinen'),
+  ('Jojos', 'La tortura de Jason a Kaneki', 'http2://192.168.1.141:8080/videos/Jojos_3.mp4', '2024-04-03', 7600, 95, 'http://192.168.1.141:8080/miniaturas/Jojos_3.jpg', 'fa49b90d-f100-4b69-8bc6-d7cde9a27204', 'Seinen'),
   ('Seven Deadly Sins', 'Denji vs Katana Man', 'http://192.168.1.141:8080/videos/Nanatsu_1.mp4', '2024-05-01', 8700, 112, 'http://192.168.1.141:8080/miniaturas/Nanatsu_1.jpg', '7db9261f-f6b5-42a6-a5c0-b6234a39ffb5', 'Acción'),
   ('Seven Deadly Sins', 'Makima muestra su verdadero poder', 'http://192.168.1.141:8080/videos/Nanatsu_2.mp4', '2024-05-02', 9200, 118, 'http://192.168.1.141:8080/miniaturas/Nanatsu_2.jpg', 'e69316d5-9003-4d3b-8322-30d8b28245ab', 'Acción'),
   ('Seven Deadly Sins', 'El contrato con el demonio zorro', 'http://192.168.1.141:8080/videos/Nanatsu_3.mp4', '2024-05-03', 8900, 108, 'http://192.168.1.141:8080/miniaturas/Nanatsu_3.jpg', '67ce3096-3848-4d10-801f-62a41e72c0cb', 'Acción'),
   ('Pokemon', 'Mob desata todo su poder', 'http://192.168.1.141:8080/videos/Pokemon_1.mp4', '2024-06-01', 6000, 95, 'http://192.168.1.141:8080/miniaturas/Pokemon_1.jpg', 'b300b6b6-155e-4c0a-a9e3-6506a5b4fffc', 'Sobrenatural'),
   ('Pokemon', 'La pelea contra Claw', 'http://192.168.1.141:8080/videos/Pokemon_2.mp4', '2024-06-02', 6400, 98, 'http://192.168.1.141:8080/miniaturas/Pokemon_2.jpg', 'f4b0fc53-348e-4e3d-9ff7-6e50e0a2480a', 'Sobrenatural'),
-  ('Pokemon', 'Gohan alcanza el Super Saiyan 2', 'http://192.168.1.141:8080/videos/Pokemon_3.mp4', '2024-06-10', 13000, 110, 'http://192.168.1.141:8080/miniaturas/Pokemon_3.jpg', '22222222-2222-2222-2222-222222222222', 'Shonen'),
+  ('Pokemon', 'La nueva temporada de Pokemon llega en muy poco tiempo, que ganas de verlo!!!!', 'http://192.168.1.141:8080/videos/Pokemon_3.mp4', '2024-06-10', 13000, 110, 'http://192.168.1.141:8080/miniaturas/Pokemon_3.jpg', '22222222-2222-2222-2222-222222222222', 'Shonen'),
   ('Sword Art Online', 'Edward sacrifica su brazo', 'http://192.168.1.141:8080/videos/Sao_1.mp4', '2024-06-11', 9700, 105, 'http://192.168.1.141:8080/miniaturas/Sao_1.jpg', 'fa49b90d-f100-4b69-8bc6-d7cde9a27204', 'Shonen'),
   ('Sword Art Online', 'Gon se transforma en adulto', 'http://192.168.1.141:8080/videos/Sao_2.mp4', '2024-06-12', 11500, 125, 'http://192.168.1.141:8080/miniaturas/Sao_2.jpg', '11111111-1111-1111-1111-111111111111', 'Shonen'),
   ('Sword Art Online', 'Asta desbloquea el poder antimagia', 'http://192.168.1.141:8080/videos/Sao_3.mp4', '2024-06-13', 8800, 100, 'http://192.168.1.141:8080/miniaturas/Sao_3.jpg', '44444444-4444-4444-4444-444444444444', 'Magia');

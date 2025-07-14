@@ -73,8 +73,8 @@ class RegisterViewModel @Inject constructor(
                 is OperationResultAuth.Success -> {
                     viewModelScope.launch {
                         sessionManager.saveUsername(_uiState.value.username)
+                        _eventChannel.send("Registro exitoso")
                     }
-                    _eventChannel.send("Registro exitoso")
                 }
 
                 is OperationResultAuth.EmptyFields -> _eventChannel.send("Campos vacíos")

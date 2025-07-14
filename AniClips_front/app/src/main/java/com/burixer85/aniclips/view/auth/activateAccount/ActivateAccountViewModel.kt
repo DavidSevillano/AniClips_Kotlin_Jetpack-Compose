@@ -33,7 +33,8 @@ class ActivateAccountViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            _username.value = sessionManager.getUsername()
+            val username = sessionManager.getUsername()
+            _username.value = username
         }
     }
 
