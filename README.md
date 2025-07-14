@@ -20,7 +20,6 @@ AniClips es una plataforma para compartir y descubrir clips de anime. Permite a 
    🖥️ Backend
    
    - **Java**: Lenguaje de programación principal.
-   - **XML**:
    - **Spring Boot**: Framework para construir la aplicación.
    - **PostgreSQL**: Base de datos utilizada para almacenar datos.
    - **Docker**: Contenerización de la aplicación.
@@ -28,10 +27,10 @@ AniClips es una plataforma para compartir y descubrir clips de anime. Permite a 
 
    📱 Frontend (Android)
 
-   - **Java (Android)**: Desarrollo de la aplicación móvil nativa.
-   - **XML**: Definición de interfaces gráficas (layouts) en Android Studio
+   - **Kotlin**: Desarrollo de la aplicación móvil nativa.
+   - **Jetpack Compose**: Definición de interfaces gráficas (layouts) en Android Studio
    - **Android Studio**: Entorno de desarrollo para la app móvil.
-   - **OkHttp**: Cliente HTTP para consumir la API REST desde Android.
+   - **Retrofit**: Cliente HTTP para consumir la API REST desde Android.
 
 ## Requisitos
 
