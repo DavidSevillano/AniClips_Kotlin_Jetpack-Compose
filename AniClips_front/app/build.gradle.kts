@@ -56,7 +56,8 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.dataStorePreference.android)
-
+    implementation(libs.coil.compose)
+    
     //Navigation
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.constraintlayout.compose)

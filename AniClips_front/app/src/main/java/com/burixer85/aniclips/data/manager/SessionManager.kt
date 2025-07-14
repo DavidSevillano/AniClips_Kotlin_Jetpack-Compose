@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.burixer85.aniclips.domain.model.UserLogin
+import com.burixer85.aniclips.domain.model.auth.UserLogin
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -39,6 +39,13 @@ class SessionManager @Inject constructor(
             .map { prefs -> prefs[USERNAME_KEY] ?: "" }
             .first()
     }
+
+    suspend fun getToken(): String {
+        return context.dataStore.data
+            .map { prefs -> prefs[TOKEN_KEY] ?: "" }
+            .first()
+    }
+    
 
     suspend fun saveUserLogin(
         id: UUID,

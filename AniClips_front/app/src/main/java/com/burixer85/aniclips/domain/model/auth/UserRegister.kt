@@ -1,4 +1,4 @@
-package com.burixer85.aniclips.domain.model
+package com.burixer85.aniclips.domain.model.auth
 
 import java.util.UUID
 

@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import com.burixer85.aniclips.view.auth.activateAccount.ActivateAccountScreen
 import com.burixer85.aniclips.view.auth.login.LoginScreen
 import com.burixer85.aniclips.view.auth.register.RegisterScreen
+import com.burixer85.aniclips.view.main.MainScreen
 
 @Composable
 fun NavigationWrapper() {
@@ -29,7 +30,12 @@ fun NavigationWrapper() {
                 )
             }
         ) {
-            LoginScreen(navigateToRegister = { navController.navigate(RegisterScreen) })
+            LoginScreen(
+                navigateToRegister = { navController.navigate(RegisterScreen) },
+                navigateToMain = {
+                    navController.navigate(MainScreen)
+                }
+            )
         }
 
         composable<RegisterScreen>(
@@ -80,9 +86,32 @@ fun NavigationWrapper() {
                     AnimatedContentTransitionScope.SlideDirection.Right,
                     tween(400)
                 )
-            },
+            }
         ) {
             ActivateAccountScreen(navigateToLogin = { navController.navigate(LoginScreen) })
+        }
+
+        composable<MainScreen>(
+            enterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left,
+                    tween(400)
+                )
+            },
+            exitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left,
+                    tween(400)
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right,
+                    tween(400)
+                )
+            }
+        ) {
+            MainScreen()
         }
     }
 }

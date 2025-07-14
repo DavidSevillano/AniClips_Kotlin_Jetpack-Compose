@@ -3,8 +3,8 @@ package com.burixer85.aniclips.view.auth.register
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.burixer85.aniclips.data.manager.SessionManager
-import com.burixer85.aniclips.domain.model.OperationResult
-import com.burixer85.aniclips.domain.usecase.RegisterUseCase
+import com.burixer85.aniclips.domain.model.auth.OperationResultAuth
+import com.burixer85.aniclips.domain.usecase.auth.RegisterUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
@@ -70,18 +70,18 @@ class RegisterViewModel @Inject constructor(
             )
             setLoadingFalse()
             when (result) {
-                is OperationResult.Success -> {
+                is OperationResultAuth.Success -> {
                     viewModelScope.launch {
                         sessionManager.saveUsername(_uiState.value.username)
                     }
                     _eventChannel.send("Registro exitoso")
                 }
 
-                is OperationResult.EmptyFields -> _eventChannel.send("Campos vacíos")
-                is OperationResult.InvalidCredentials -> _eventChannel.send("Datos inválidos o usuario ya existente")
-                is OperationResult.NetworkError -> _eventChannel.send("Error de red")
-                is OperationResult.InvalidEmailFormat -> _eventChannel.send("Formato del email erróneo")
-                is OperationResult.RepeatPasswordError -> _eventChannel.send("Las contraseñas no coinciden")
+                is OperationResultAuth.EmptyFields -> _eventChannel.send("Campos vacíos")
+                is OperationResultAuth.InvalidCredentials -> _eventChannel.send("Datos inválidos o usuario ya existente")
+                is OperationResultAuth.NetworkError -> _eventChannel.send("Error de red")
+                is OperationResultAuth.InvalidEmailFormat -> _eventChannel.send("Formato del email erróneo")
+                is OperationResultAuth.RepeatPasswordError -> _eventChannel.send("Las contraseñas no coinciden")
             }
         }
     }

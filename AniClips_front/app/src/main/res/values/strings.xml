@@ -24,6 +24,9 @@
     <string name="activate_account_screen_text_presentation">Introduce el código de activación que hemos enviado a tu email</string>
     <string name="activate_account_screen_textfield_username">Código de activación</string>
     <string name="activate_account_screen_button_send">Enviar</string>
+    <string name="activate_account_screen_dialog_title">¡Bienvenido/a %1$s!</string>
+    <string name="activate_account_screen_dialog_text_presentation">Ya puedes iniciar sesión con tu cuenta</string>
+    <string name="activate_account_screen_dialog_button_accept">Aceptar</string>
 
 
 </resources>

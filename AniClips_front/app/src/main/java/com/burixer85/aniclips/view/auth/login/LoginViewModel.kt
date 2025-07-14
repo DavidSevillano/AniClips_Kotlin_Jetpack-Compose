@@ -3,8 +3,8 @@ package com.burixer85.aniclips.view.auth.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.burixer85.aniclips.data.manager.SessionManager
-import com.burixer85.aniclips.domain.model.OperationResult
-import com.burixer85.aniclips.domain.usecase.LoginUseCase
+import com.burixer85.aniclips.domain.model.auth.OperationResultAuth
+import com.burixer85.aniclips.domain.usecase.auth.LoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
@@ -55,7 +55,7 @@ class LoginViewModel @Inject constructor(
             val result = loginUseCase(_uiState.value.username, _uiState.value.password)
             setLoadingFalse()
             when (result) {
-                is OperationResult.Success -> {
+                is OperationResultAuth.Success -> {
                     val user = result.data
                     sessionManager.saveUserLogin(
                         id = user.id,
@@ -67,9 +67,9 @@ class LoginViewModel @Inject constructor(
                     _eventChannel.send("Login exitoso")
                 }
 
-                is OperationResult.EmptyFields -> _eventChannel.send("Campos vacíos")
-                is OperationResult.InvalidCredentials -> _eventChannel.send("Credenciales incorrectas")
-                is OperationResult.NetworkError -> _eventChannel.send("Error de red")
+                is OperationResultAuth.EmptyFields -> _eventChannel.send("Campos vacíos")
+                is OperationResultAuth.InvalidCredentials -> _eventChannel.send("Credenciales incorrectas")
+                is OperationResultAuth.NetworkError -> _eventChannel.send("Error de red")
                 else -> {}
             }
         }

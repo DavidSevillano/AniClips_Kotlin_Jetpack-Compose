@@ -13,6 +13,8 @@ val Pink40 = Color(0xFF7D5260)
 //AniClips
 
 val AniClipsBlue = Color(0xFF2D54CB)
+val AniClipsLighterBlue = Color(0xFF4E9EFF)
 val AppBackground = Color(0xFF191A1F)
 val TextFieldBackground = Color(0xFF1F222B)
 val TextFieldPlaceholder = Color(0xFF66FFFFFF)
+val TextGray = Color(0xFF66FFFFFF)

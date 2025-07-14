@@ -20,5 +20,4 @@ class LoginService @Inject constructor(private val loginClient: LoginClient) {
             }
         }
     }
-
 }

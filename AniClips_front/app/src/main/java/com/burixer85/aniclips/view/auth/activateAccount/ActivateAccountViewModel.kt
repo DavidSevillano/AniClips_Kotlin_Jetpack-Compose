@@ -3,8 +3,8 @@ package com.burixer85.aniclips.view.auth.activateAccount
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.burixer85.aniclips.data.manager.SessionManager
-import com.burixer85.aniclips.domain.model.OperationResult
-import com.burixer85.aniclips.domain.usecase.ActivateAccountUseCase
+import com.burixer85.aniclips.domain.model.auth.OperationResultAuth
+import com.burixer85.aniclips.domain.usecase.auth.ActivateAccountUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
@@ -57,10 +57,10 @@ class ActivateAccountViewModel @Inject constructor(
             val result = activateAccountUseCase(_uiState.value.code)
             setLoadingFalse()
             when (result) {
-                is OperationResult.Success -> _eventChannel.send("Cuenta activada correctamente")
-                is OperationResult.EmptyFields -> _eventChannel.send("Campos vacíos")
-                is OperationResult.InvalidCredentials -> _eventChannel.send("Credenciales incorrectas")
-                is OperationResult.NetworkError -> _eventChannel.send("Error de red")
+                is OperationResultAuth.Success -> _eventChannel.send("Cuenta activada correctamente")
+                is OperationResultAuth.EmptyFields -> _eventChannel.send("Campos vacíos")
+                is OperationResultAuth.InvalidCredentials -> _eventChannel.send("Credenciales incorrectas")
+                is OperationResultAuth.NetworkError -> _eventChannel.send("Error de red")
                 else -> {}
             }
         }

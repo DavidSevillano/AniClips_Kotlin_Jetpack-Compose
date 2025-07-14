@@ -37,6 +37,11 @@ val Typography = Typography(
     labelMedium = TextStyle(
         fontFamily = lexend,
         fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+    ),
+    labelSmall = TextStyle(
+        fontFamily = lexend,
+        fontWeight = FontWeight.Normal,
         fontSize = 12.sp,
     )
 

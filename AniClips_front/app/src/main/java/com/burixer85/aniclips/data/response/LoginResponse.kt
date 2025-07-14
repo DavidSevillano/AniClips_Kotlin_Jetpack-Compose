@@ -1,5 +1,6 @@
 package com.burixer85.aniclips.data.response
 
+import com.burixer85.aniclips.domain.model.auth.UserLogin
 import java.util.UUID
 
 data class LoginResponse(
@@ -10,3 +11,13 @@ data class LoginResponse(
     val token: String,
     val refreshToken: String
 )
+
+fun LoginResponse.toDomain(): UserLogin {
+    return UserLogin(
+        id = id,
+        username = username,
+        avatar = avatar,
+        role = roles,
+        token = token
+    )
+}
