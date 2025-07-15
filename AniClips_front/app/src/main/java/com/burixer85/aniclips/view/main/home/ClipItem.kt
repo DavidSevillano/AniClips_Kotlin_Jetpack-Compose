@@ -33,16 +33,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.burixer85.aniclips.R
-import com.burixer85.aniclips.domain.model.main.home.Clip
 import com.burixer85.aniclips.ui.theme.AniClipsBlue
 import com.burixer85.aniclips.ui.theme.TextGray
 import com.burixer85.aniclips.view.core.components.AniAndroidView
 import com.burixer85.aniclips.view.core.components.AniCircularProgressIndicator
 import com.burixer85.aniclips.view.core.components.AniInteractionIconButton
+import com.burixer85.aniclips.view.main.model.ClipUi
 
 
 @Composable
-fun ClipItem(clip: Clip) {
+fun ClipItem(clip: ClipUi) {
 
     Column(
         modifier = Modifier
@@ -58,7 +58,7 @@ fun ClipItem(clip: Clip) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             AsyncImage(
-                model = clip.user.avatar.avatarUrl,
+                model = clip.avatar,
                 contentDescription = "Perfil",
                 modifier = Modifier
                     .size(42.dp)
@@ -67,7 +67,7 @@ fun ClipItem(clip: Clip) {
                 contentScale = ContentScale.Crop
             )
             Text(
-                text = clip.user.username,
+                text = clip.username,
                 color = Color.White,
                 fontSize = 16.sp,
                 maxLines = 1,
@@ -98,7 +98,7 @@ fun ClipItem(clip: Clip) {
         ) {
             if (hasStarted) {
                 AniAndroidView(
-                    url = clip.videoUrl,
+                    url = clip.video,
                     isPlaying = isPlaying,
                     onVideoViewReady = { videoView ->
                         videoViewRef = videoView
@@ -162,7 +162,7 @@ fun ClipItem(clip: Clip) {
                 }
             } else {
                 AsyncImage(
-                    model = clip.thumbnailUrl,
+                    model = clip.thumbnail,
                     contentDescription = "Miniatura",
                     modifier = Modifier.matchParentSize()
                 )
