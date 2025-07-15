@@ -1,7 +1,7 @@
 # Proyecto Aniclips
 
 <h1 align="center">
-    <img src="https://github.com/DavidSevillano/AniClips/blob/main/logo.jpg" alt="logo_animalia"  width="300" height="300">
+    <img src="https://github.com/DavidSevillano/AniClips/blob/main/logo.jpg" alt="logo_aniclips"  width="300" height="300">
 </h1>
 
 ## Descripción del Proyecto
@@ -52,7 +52,7 @@ AniClips es una plataforma para compartir y descubrir clips de anime. Permite a 
 
 1. **Clonar el repositorio:**
    ```
-   git clone https://github.com/tu_usuario/AniClips.git
+   git clone https://github.com/DavidSevillano/AniClips_Kotlin_Jetpack-Compose.git
    cd AniClips
    ```
 
@@ -62,23 +62,46 @@ AniClips es una plataforma para compartir y descubrir clips de anime. Permite a 
    mvn clean install
    ```
 
-3. **Configurar Docker:**
+3. **Configurar la IP del backend**
+
+   - Asegúrate de estar en la misma red Wi-Fi que el dispositivo.
+     
+   - Obtén la IP local de tu máquina desde el terminal con:
+        ```
+     **ipconfig**
+        ```
+   - Asegúrate de introducir en el archivo import.sql tu ip local en los registros de perfil y clip, justo donde pone "TU IP LOCAL AQUI", así te aparecerán los avatares y clips de ejemplo.
+   ```
+   ('TU IP LOCAL AQUI:8080/iconos/icono_ejemplo1.jpg', 'Aficionado de los anime de deportes como Blue Lock, Haikyuu, Aoashi etc', '11111111-1111-1111-1111-111111111111'),
+   
+                    |
+                    v
+    
+   ('http://192.168.1.125:8080/iconos/icono_ejemplo1.jpg', 'Aficionado de los anime de deportes como Blue Lock, Haikyuu, Aoashi etc', '11111111-1111-1111-1111-111111111111')
+   ```
+
+4. **Configurar Docker:**
    Asegúrate de que Docker y Docker Compose estén instalados y en funcionamiento. Puedes verificarlo con:
    ```
    docker --version
    docker-compose --version
    ```
 
-4. **Levantar el contenedor:**
+5. **Levantar el contenedor:**
    Utiliza Docker Compose para levantar el contenedor de la aplicación. Asegúrate de estar en el directorio raíz del proyecto y ejecuta:
    ```bash
    docker-compose up
    ```
 
-5. **Registrarse en la aplicación:**
+## Si quieres probarlo con Postman:
+
+1. **Uso de la colección de Postman:**
+   Puedes importar la colección de Postman que se encuentra en el archivo `Aniclips.postman_collection.json` para facilitar las pruebas de la API.
+
+2. **Registrarse en la aplicación:**
    Puedes registrarte en la aplicación introduciendo tus datos a través de la siguiente petición en Postman:
    ```
-   POST http://localhost:8081/auth/register
+   POST http://localhost:8080/auth/register
    ```
 
    **Cuerpo de la solicitud:**
@@ -91,10 +114,10 @@ AniClips es una plataforma para compartir y descubrir clips de anime. Permite a 
    }
    ```
 
-6. **Activar tu cuenta:**
+3. **Activar tu cuenta:**
    Después de registrarte, recibirás un correo con un código de activación. Debes introducir el código de activación con la siguiente petición:
    ```
-   POST http://localhost:8081/activate/account/
+   POST http://localhost:8080/activate/account/
    ```
 
    **Cuerpo de la solicitud:**
@@ -104,10 +127,10 @@ AniClips es una plataforma para compartir y descubrir clips de anime. Permite a 
    }
    ```
 
-7. **Iniciar sesión:**
+4. **Iniciar sesión:**
    Ahora solo queda iniciar sesión introduciendo tu nombre de usuario y contraseña a través de esta petición:
    ```
-   POST http://localhost:8081/auth/login
+   POST http://localhost:8080/auth/login
    ```
 
    **Cuerpo de la solicitud:**
@@ -117,19 +140,11 @@ AniClips es una plataforma para compartir y descubrir clips de anime. Permite a 
        "password": "tu_contraseña"
    }
    ```
+   
+## AVISO: Debido a que el proyecto está en desarrollo se recomienda hacer uso de un usuario predefinido.
 
-8. **Uso de la colección de Postman:**
-   Puedes importar la colección de Postman que se encuentra en el archivo `Aniclips.postman_collection.json` para facilitar las pruebas de la API. Asegúrate de configurar la variable `BASEURL` en Postman a `http://localhost:8081`.
-
-9. **Ejemplos de peticiones:**
-    - **Obtener todos los clips:**
-      ```
-      GET http://localhost:8081/clip/?page=0
-      ```
-
-    - **Eliminar un clip:**
-      ```
-      DELETE http://localhost:8081/clip/delete/{clipId}
+- Nombre de usuario: StrikerDa10
+- Contraseña: 1
 
 ## Si quieres probarlo con un dispositivo movil físico o virtual solo tienes que:
 
@@ -139,9 +154,9 @@ AniClips es una plataforma para compartir y descubrir clips de anime. Permite a 
 
     - Selecciona "Open an existing project".
 
-    - Navega hasta la carpeta AniClips-Android (o el nombre de tu carpeta frontend) y ábrela.
+    - Navega hasta la carpeta AniClips_front y ábrela.
   
-2. **Configurar la IP del backend**
+2. **Configurar la IP del frontend**
 
 Como el backend está dockerizado, localhost no funcionará desde un dispositivo físico ni desde un emulador. Para solucionarlo:
 
@@ -152,9 +167,12 @@ Como el backend está dockerizado, localhost no funcionará desde un dispositivo
      **ipconfig**
         ```
 
-   - En el proyecto abre la clase **Constantes.java** y cambia la urlbase.
+   - En el proyecto abre la clase **view/core/NetworkModule** y cambia la ApiBaseUrl.
         ```
-     public static final String BASE_URL = "http://<IP_LOCAL>:8081";
+     val ApiBaseUrl = "http://<IP_LOCAL>:8080/";
+                    |
+                    v
+     val ApiBaseUrl = "http://192.168.1.125:8080/";
         ```
 
 3. **Ejecutar en un dispositivo o emulador**
