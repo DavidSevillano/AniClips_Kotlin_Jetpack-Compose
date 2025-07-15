@@ -93,6 +93,11 @@ AniClips es una plataforma para compartir y descubrir clips de anime. Permite a 
    docker-compose up
    ```
 
+## AVISO: Debido a que la aplicación está actualmente en desarrollo se recomienda hacer uso de un usuario predefinido. La función de activar cuenta está deshabilitada por problemas técnicos (Expiró el periodo de prueba de Mailtrap D,:).
+
+- Nombre de usuario: StrikerDa10
+- Contraseña: 1
+
 ## Si quieres probarlo con Postman:
 
 1. **Uso de la colección de Postman:**
@@ -141,11 +146,6 @@ AniClips es una plataforma para compartir y descubrir clips de anime. Permite a 
    }
    ```
    
-## AVISO: Debido a que la aplicación está actualmente en desarrollo se recomienda hacer uso de un usuario predefinido.
-
-- Nombre de usuario: StrikerDa10
-- Contraseña: 1
-
 ## Si quieres probarlo con un dispositivo movil físico o virtual solo tienes que:
 
 1. **Abrir el proyecto en Android Studio**
