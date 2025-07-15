@@ -141,7 +141,7 @@ AniClips es una plataforma para compartir y descubrir clips de anime. Permite a 
    }
    ```
    
-## AVISO: Debido a que el proyecto está en desarrollo se recomienda hacer uso de un usuario predefinido.
+## AVISO: Debido a que la aplicación está actualmente en desarrollo se recomienda hacer uso de un usuario predefinido.
 
 - Nombre de usuario: StrikerDa10
 - Contraseña: 1
