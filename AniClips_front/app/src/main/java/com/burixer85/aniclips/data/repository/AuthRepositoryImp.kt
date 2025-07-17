@@ -1,12 +1,12 @@
 package com.burixer85.aniclips.data.repository
 
-import com.burixer85.aniclips.data.response.ActivateAccountResponse
-import com.burixer85.aniclips.data.response.LoginResponse
-import com.burixer85.aniclips.data.response.RegisterResponse
-import com.burixer85.aniclips.data.response.toDomain
-import com.burixer85.aniclips.data.service.ActivateAccountService
-import com.burixer85.aniclips.data.service.LoginService
-import com.burixer85.aniclips.data.service.RegisterService
+import com.burixer85.aniclips.data.response.auth.ActivateAccountResponse
+import com.burixer85.aniclips.data.response.auth.LoginResponse
+import com.burixer85.aniclips.data.response.auth.RegisterResponse
+import com.burixer85.aniclips.data.response.auth.toDomain
+import com.burixer85.aniclips.data.service.auth.ActivateAccountService
+import com.burixer85.aniclips.data.service.auth.LoginService
+import com.burixer85.aniclips.data.service.auth.RegisterService
 import com.burixer85.aniclips.domain.model.auth.UserActivateAccount
 import com.burixer85.aniclips.domain.model.auth.UserLogin
 import com.burixer85.aniclips.domain.model.auth.UserRegister

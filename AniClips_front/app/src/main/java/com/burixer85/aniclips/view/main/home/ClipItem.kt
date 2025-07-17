@@ -48,7 +48,7 @@ fun ClipItem(clip: ClipUi) {
         modifier = Modifier
             .fillMaxWidth()
             .background(MaterialTheme.colorScheme.background)
-            .padding(top = 6.dp)
+            .padding(top = 21.dp)
     ) {
         // Header
         Row(

@@ -1,6 +1,6 @@
-package com.burixer85.aniclips.data.network
+package com.burixer85.aniclips.data.network.home
 
-import com.burixer85.aniclips.data.response.GetClipsResponse
+import com.burixer85.aniclips.data.response.home.GetAllClipsResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -12,5 +12,5 @@ interface ClipClient {
         @Query("page") page: Int,
         @Query("size") size: Int,
         @Header("Authorization") token: String
-    ): Response<GetClipsResponse>
+    ): Response<GetAllClipsResponse>
 }

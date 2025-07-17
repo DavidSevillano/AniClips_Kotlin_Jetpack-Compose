@@ -1,4 +1,4 @@
-package com.burixer85.aniclips.data.response.dto
+package com.burixer85.aniclips.data.response.home.dto
 
 import com.burixer85.aniclips.domain.model.main.home.Clip
 

@@ -1,13 +1,13 @@
 package com.burixer85.aniclips.view.main.home
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.burixer85.aniclips.data.manager.SessionManager
 import com.burixer85.aniclips.domain.model.main.home.Clip
-import com.burixer85.aniclips.domain.repository.ClipRepository
+import com.burixer85.aniclips.domain.repository.HomeRepository
 import com.burixer85.aniclips.view.main.model.ClipUi
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeScreenViewModel @Inject constructor(
-    private val clipRepository: ClipRepository,
+    private val homeRepository: HomeRepository,
     private val sessionManager: SessionManager
 ) : ViewModel() {
 
@@ -36,15 +36,22 @@ class HomeScreenViewModel @Inject constructor(
 
     fun loadClips(page: Int = 0, size: Int = 4) {
         viewModelScope.launch {
-            setLoadingTrue()
+            val startTime = System.currentTimeMillis()
             val token = sessionManager.getToken()
-            Log.d("HomeScreenViewModel", "Clips recibidos: $token")
-            val result = clipRepository.getAllClips(page, size, "Bearer $token")
-            Log.d("HomeScreenViewModel", "Clips recibidos: ${result?.clips}")
+            val result = homeRepository.getAllClips(page, size, "Bearer $token")
+            val elapsed = System.currentTimeMillis() - startTime
+
             val clipsDomain = result?.clips ?: emptyList()
             val clipsUi = clipsDomain.map { mapClipToUi(it) }
             _clips.value = clipsUi
-            setLoadingFalse()
+
+            if (elapsed < 100) {
+                setLoadingFalse()
+            } else {
+                setLoadingTrue()
+                delay(100)
+                setLoadingFalse()
+            }
         }
     }
 
@@ -63,7 +70,6 @@ class HomeScreenViewModel @Inject constructor(
         )
     }
 }
-
 
 data class HomeUiState(
     val isLoading: Boolean = false

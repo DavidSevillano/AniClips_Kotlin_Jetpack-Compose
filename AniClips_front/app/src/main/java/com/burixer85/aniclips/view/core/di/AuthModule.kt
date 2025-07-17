@@ -1,9 +1,9 @@
 package com.burixer85.aniclips.view.core.di
 
 import com.burixer85.aniclips.data.repository.AuthRepositoryImp
-import com.burixer85.aniclips.data.service.ActivateAccountService
-import com.burixer85.aniclips.data.service.LoginService
-import com.burixer85.aniclips.data.service.RegisterService
+import com.burixer85.aniclips.data.service.auth.ActivateAccountService
+import com.burixer85.aniclips.data.service.auth.LoginService
+import com.burixer85.aniclips.data.service.auth.RegisterService
 import com.burixer85.aniclips.domain.repository.AuthRepository
 import dagger.Module
 import dagger.Provides

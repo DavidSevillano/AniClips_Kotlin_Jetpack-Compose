@@ -15,20 +15,15 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        window.insetsController?.let { controller ->
+            controller.hide(WindowInsets.Type.navigationBars())
+            controller.hide(WindowInsets.Type.statusBars())
+            controller.systemBarsBehavior =
+                WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        }
         setContent {
             AniClipsTheme {
-                NavigationWrapper { isMainScreen ->
-                    val controller = window.insetsController
-                    if (isMainScreen) {
-                        controller?.hide(WindowInsets.Type.navigationBars())
-                        controller?.hide(WindowInsets.Type.statusBars())
-                        controller?.systemBarsBehavior =
-                            WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-                    } else {
-                        controller?.show(WindowInsets.Type.navigationBars())
-                        controller?.show(WindowInsets.Type.statusBars())
-                    }
-                }
+                NavigationWrapper()
             }
         }
     }

@@ -1,8 +1,8 @@
 package com.burixer85.aniclips.view.core.di
 
-import com.burixer85.aniclips.data.repository.ClipRepositoryImp
-import com.burixer85.aniclips.data.service.ClipService
-import com.burixer85.aniclips.domain.repository.ClipRepository
+import com.burixer85.aniclips.data.repository.HomeRepositoryImp
+import com.burixer85.aniclips.data.service.home.ClipService
+import com.burixer85.aniclips.domain.repository.HomeRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,7 +12,7 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 object HomeModule {
     @Provides
-    fun bindClipRepository(clipService: ClipService): ClipRepository {
-        return ClipRepositoryImp(clipService)
+    fun bindClipRepository(clipService: ClipService): HomeRepository {
+        return HomeRepositoryImp(clipService)
     }
 }

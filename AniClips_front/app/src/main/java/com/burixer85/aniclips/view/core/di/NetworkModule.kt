@@ -1,9 +1,10 @@
 package com.burixer85.aniclips.view.core.di
 
-import com.burixer85.aniclips.data.network.ActivateAccountClient
-import com.burixer85.aniclips.data.network.ClipClient
-import com.burixer85.aniclips.data.network.LoginClient
-import com.burixer85.aniclips.data.network.RegisterClient
+import com.burixer85.aniclips.data.network.auth.ActivateAccountClient
+import com.burixer85.aniclips.data.network.auth.LoginClient
+import com.burixer85.aniclips.data.network.auth.RegisterClient
+import com.burixer85.aniclips.data.network.home.ClipClient
+import com.burixer85.aniclips.data.network.search.ThumbnailClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -49,6 +50,12 @@ class NetworkModule {
     @Provides
     fun provideActivateAccountClient(retrofit: Retrofit): ActivateAccountClient {
         return retrofit.create(ActivateAccountClient::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideThumbnailClient(retrofit: Retrofit): ThumbnailClient {
+        return retrofit.create(ThumbnailClient::class.java)
     }
 
 

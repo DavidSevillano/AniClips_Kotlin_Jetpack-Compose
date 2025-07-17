@@ -71,7 +71,7 @@ fun LoginScreen(
 
             AniImageLogo(
                 modifier = Modifier
-                    .padding(top = 64.dp)
+                    .padding(top = 90.dp)
                     .size(180.dp)
                     .constrainAs(iLogo) {
                         end.linkTo(parent.end)

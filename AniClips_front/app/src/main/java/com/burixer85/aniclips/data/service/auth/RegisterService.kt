@@ -1,8 +1,8 @@
-package com.burixer85.aniclips.data.service
+package com.burixer85.aniclips.data.service.auth
 
-import com.burixer85.aniclips.data.network.RegisterClient
+import com.burixer85.aniclips.data.network.auth.RegisterClient
 import com.burixer85.aniclips.data.request.RegisterRequest
-import com.burixer85.aniclips.data.response.RegisterResponse
+import com.burixer85.aniclips.data.response.auth.RegisterResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

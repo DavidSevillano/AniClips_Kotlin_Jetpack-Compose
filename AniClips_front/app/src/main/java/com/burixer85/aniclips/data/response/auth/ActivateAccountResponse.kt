@@ -1,4 +1,4 @@
-package com.burixer85.aniclips.data.response
+package com.burixer85.aniclips.data.response.auth
 
 import com.burixer85.aniclips.domain.model.auth.UserActivateAccount
 import java.util.UUID

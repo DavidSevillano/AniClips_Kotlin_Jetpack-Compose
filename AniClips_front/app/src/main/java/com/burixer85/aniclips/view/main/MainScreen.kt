@@ -25,6 +25,7 @@ fun MainScreen() {
         NavItem("Profile", R.drawable.ic_profile)
     )
 
+
     var selectedIndex by remember { mutableIntStateOf(0) }
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,

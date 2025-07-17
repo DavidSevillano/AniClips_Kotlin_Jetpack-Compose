@@ -11,6 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.burixer85.aniclips.view.core.components.AniCircularProgressIndicator
 
 @Composable
 fun HomeScreen(
@@ -21,21 +22,6 @@ fun HomeScreen(
     val uiState by homeScreenViewModel.uiState.collectAsStateWithLifecycle()
     val clips = homeScreenViewModel.clips.collectAsState()
 
-    /*
-    val clip = Clip(
-        id = 1,
-        username = "UsuarioEjemplo",
-        description = "Descripción de prueba para el clip.",
-        date = "10 de febrero",
-        likeCount = 123,
-        commentCount = 45,
-        rating = 4.8,
-        isFollowed = false,
-        isLoading = false,
-        videoUrl = "https://ejemplo.com/video.mp4"
-    )
-     */
-
     LaunchedEffect(Unit) {
         homeScreenViewModel.loadClips()
     }
@@ -45,16 +31,13 @@ fun HomeScreen(
         containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
 
-        /*
-        Column(modifier = Modifier.padding(padding)) {
-            ClipItem(clip)
-        }
-         */
-
         LazyColumn(contentPadding = padding) {
             items(clips.value) { clip ->
                 ClipItem(clip)
             }
+        }
+        if (uiState.isLoading) {
+            AniCircularProgressIndicator()
         }
     }
 

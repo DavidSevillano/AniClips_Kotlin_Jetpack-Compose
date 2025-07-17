@@ -71,7 +71,7 @@ fun RegisterScreen(
 
             AniImageLogo(
                 modifier = Modifier
-                    .padding(top = 24.dp)
+                    .padding(top = 50.dp)
                     .size(180.dp)
                     .constrainAs(ilogo) {
                         start.linkTo(parent.start)

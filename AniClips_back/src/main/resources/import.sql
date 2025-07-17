@@ -1,4 +1,3 @@
-
 -- Introduce tu ip local en los registros de perfil y clip, justo donde pone "TU IP LOCAL AQUI" ejemplo: http://192.168.1.125:8080/iconos/icono_ejemplo1.jpg'
 
 INSERT INTO usuario (id, username, email, password, enabled, activation_token, created_at)
