@@ -1,4 +1,4 @@
-package com.burixer85.aniclips.view.core.di
+package com.burixer85.aniclips.data.di
 
 import com.burixer85.aniclips.data.repository.AuthRepositoryImp
 import com.burixer85.aniclips.data.service.auth.ActivateAccountService

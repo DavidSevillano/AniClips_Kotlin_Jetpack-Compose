@@ -1,4 +1,4 @@
-package com.burixer85.aniclips.view.core.di
+package com.burixer85.aniclips.data.di
 
 import com.burixer85.aniclips.data.repository.HomeRepositoryImp
 import com.burixer85.aniclips.data.service.home.ClipService

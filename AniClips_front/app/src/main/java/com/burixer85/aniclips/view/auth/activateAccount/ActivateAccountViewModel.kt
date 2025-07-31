@@ -22,7 +22,7 @@ class ActivateAccountViewModel @Inject constructor(
 ) :
     ViewModel() {
 
-    private val _uiState = MutableStateFlow(ActivateAccountUiState())
+    private val _uiState = MutableStateFlow<ActivateAccountUiState>(ActivateAccountUiState())
     val uiState: StateFlow<ActivateAccountUiState> = _uiState
 
     private val _eventChannel = Channel<String>()

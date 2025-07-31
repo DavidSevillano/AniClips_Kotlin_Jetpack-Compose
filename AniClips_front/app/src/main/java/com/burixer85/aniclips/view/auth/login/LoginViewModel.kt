@@ -22,7 +22,7 @@ class LoginViewModel @Inject constructor(
     val sessionManager: SessionManager
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(LoginUiState())
+    private val _uiState = MutableStateFlow<LoginUiState>(LoginUiState())
     val uiState: StateFlow<LoginUiState> = _uiState
 
     private val _eventChannel = Channel<String>()

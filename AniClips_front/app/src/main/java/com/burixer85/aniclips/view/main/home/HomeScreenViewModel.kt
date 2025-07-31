@@ -23,7 +23,7 @@ class HomeScreenViewModel @Inject constructor(
     private val _clips = MutableStateFlow<List<ClipUi>>(emptyList())
     val clips: StateFlow<List<ClipUi>> = _clips
 
-    private val _uiState = MutableStateFlow(HomeUiState())
+    private val _uiState = MutableStateFlow<HomeUiState>(HomeUiState())
     val uiState: StateFlow<HomeUiState> = _uiState
 
     fun setLoadingTrue() {

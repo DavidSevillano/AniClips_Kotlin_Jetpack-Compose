@@ -63,7 +63,6 @@ fun RegisterScreen(
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(padding)
         ) {
             val (ilogo, tPresentation, tfEmail, tfUsername, tfPassword, tfRepeatPassword, btnRegister, tbtnBackToLogin) = createRefs()
             var passwordHidden by remember { mutableStateOf(true) }

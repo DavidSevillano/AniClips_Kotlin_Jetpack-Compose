@@ -1,13 +1,19 @@
 package com.burixer85.aniclips.data.repository
 
+import com.burixer85.aniclips.data.response.search.GetAllFilteredThumbailsResponse
 import com.burixer85.aniclips.data.response.search.GetAllThumbnailsResponse
 import com.burixer85.aniclips.data.response.search.toDomain
+import com.burixer85.aniclips.data.service.search.FilteredThumbnailService
 import com.burixer85.aniclips.data.service.search.ThumbnailService
+import com.burixer85.aniclips.domain.model.main.search.GetAllFilteredThumbnails
 import com.burixer85.aniclips.domain.model.main.search.GetAllThumbnails
 import com.burixer85.aniclips.domain.repository.SearchRepository
 import javax.inject.Inject
 
-class SearchRepositoryImp @Inject constructor(private val thumbnailService: ThumbnailService) :
+class SearchRepositoryImp @Inject constructor(
+    private val thumbnailService: ThumbnailService,
+    private val filteredThumbnailService: FilteredThumbnailService
+) :
     SearchRepository {
 
     override suspend fun getAllThumbnails(page: Int, size: Int): GetAllThumbnails? {
@@ -16,5 +22,16 @@ class SearchRepositoryImp @Inject constructor(private val thumbnailService: Thum
 
         return getAllThumbnailsResponse?.toDomain()
 
+    }
+
+    override suspend fun getAllFilteredThumbnails(
+        search: String,
+        page: Int,
+        size: Int
+    ): GetAllFilteredThumbnails? {
+        val getAllFilteredThumbnailsResponse: GetAllFilteredThumbailsResponse? =
+            filteredThumbnailService.getAllFilteredThumbnails(search, page, size)
+
+        return getAllFilteredThumbnailsResponse?.toDomain()
     }
 }

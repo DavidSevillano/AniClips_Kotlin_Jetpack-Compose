@@ -109,7 +109,6 @@ fun ActivateAccountScreen(
         ConstraintLayout(
             Modifier
                 .fillMaxSize()
-                .padding(padding),
         ) {
             val guidelineTop = createGuidelineFromTop(0.2f)
             val guidelineStart = createGuidelineFromStart(0.06f)

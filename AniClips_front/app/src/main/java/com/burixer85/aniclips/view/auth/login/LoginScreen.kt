@@ -64,7 +64,6 @@ fun LoginScreen(
         ConstraintLayout(
             Modifier
                 .fillMaxSize()
-                .padding(padding)
         ) {
             val (iLogo, tPresentation, tfUsername, tfPassword, btnLogin, tbtnNotAccount, tbtnRegister) = createRefs()
             var passwordHidden by remember { mutableStateOf(true) }

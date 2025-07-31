@@ -21,7 +21,7 @@ class RegisterViewModel @Inject constructor(
     val sessionManager: SessionManager
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(RegisterUiState())
+    private val _uiState = MutableStateFlow<RegisterUiState>(RegisterUiState())
     val uiState: StateFlow<RegisterUiState> = _uiState
 
     private val _eventChannel = Channel<String>()
