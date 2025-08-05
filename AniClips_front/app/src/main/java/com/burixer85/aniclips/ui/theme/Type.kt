@@ -14,6 +14,11 @@ val lexend = FontFamily(
 
 val Typography = Typography(
 
+    titleSmall = TextStyle(
+        fontFamily = lexend,
+        fontWeight = FontWeight.Normal,
+        fontSize = 30.sp,
+    ),
     bodyLarge = TextStyle(
         fontFamily = lexend,
         fontWeight = FontWeight.Normal,

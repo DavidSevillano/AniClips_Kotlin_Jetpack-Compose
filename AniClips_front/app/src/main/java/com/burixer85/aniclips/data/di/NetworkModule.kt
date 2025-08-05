@@ -4,6 +4,7 @@ import com.burixer85.aniclips.data.network.auth.ActivateAccountClient
 import com.burixer85.aniclips.data.network.auth.LoginClient
 import com.burixer85.aniclips.data.network.auth.RegisterClient
 import com.burixer85.aniclips.data.network.home.ClipClient
+import com.burixer85.aniclips.data.network.profile.ProfileClient
 import com.burixer85.aniclips.data.network.search.FilterThumbnailClient
 import com.burixer85.aniclips.data.network.search.ThumbnailClient
 import dagger.Module
@@ -63,6 +64,12 @@ class NetworkModule {
     @Provides
     fun provideFilterThumbnailClinet(retrofit: Retrofit): FilterThumbnailClient {
         return retrofit.create(FilterThumbnailClient::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideProfileClient(retrofit: Retrofit): ProfileClient {
+        return retrofit.create(ProfileClient::class.java)
     }
 
 

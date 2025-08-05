@@ -29,6 +29,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -79,7 +80,11 @@ fun ClipItem(clip: ClipUi) {
                 colors = ButtonDefaults.buttonColors(containerColor = AniClipsBlue),
                 modifier = Modifier.width(97.dp)
             ) {
-                Text("Seguir", fontSize = 12.sp, color = Color.White)
+                Text(
+                    stringResource(R.string.home_screen_button_follow),
+                    fontSize = 12.sp,
+                    color = Color.White
+                )
             }
         }
 

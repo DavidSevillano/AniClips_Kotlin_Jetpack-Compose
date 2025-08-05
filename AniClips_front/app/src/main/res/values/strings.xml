@@ -28,5 +28,16 @@
     <string name="activate_account_screen_dialog_text_presentation">Ya puedes iniciar sesión con tu cuenta</string>
     <string name="activate_account_screen_dialog_button_accept">Aceptar</string>
 
+    <!-- Home Screen -->
+    <string name="home_screen_button_follow">Seguir</string>
+
+    <!-- Search Screen -->
+    <string name="search_screen_text_field_search">Nombre de anime</string>
+
+    <!-- Profile Screen -->
+    <string name="profile_screen_box_clips">Clips</string>
+    <string name="profile_screen_box_followers">Seguidores</string>
+    <string name="profile_screen_box_followed">Seguidos</string>
+    <string name="profile_screen_text_description_title">Descripción</string>
 
 </resources>

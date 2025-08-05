@@ -26,9 +26,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.burixer85.aniclips.R
 import com.burixer85.aniclips.ui.theme.TextFieldPlaceholder
 import com.burixer85.aniclips.view.core.components.AniCircularProgressIndicator
 
@@ -75,7 +77,7 @@ fun SearchScreen(
                     .padding(top = 28.dp, start = 18.dp, end = 18.dp),
                 placeholder = {
                     Text(
-                        text = "Nombre de anime",
+                        text = stringResource(R.string.search_screen_text_field_search),
                         color = TextFieldPlaceholder,
                         style = MaterialTheme.typography.bodyMedium
                     )
